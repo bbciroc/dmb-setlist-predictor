@@ -105,3 +105,13 @@ promo-cycle songs like Samurai Cop repeated 39x in 2018) while 2026 is at
 events now carry era-decay weights (0.6^years-ago), so today's no-repeat
 culture sets today's cells. Backtest unchanged (36.9%); predictions no
 longer include last night's songs.
+
+## Second-stage gap calibration (user-spotted overpricing)
+
+The raw table overprices gap-2 picks and underprices the 3-6 "due" zone —
+consistent in BOTH tours (2025: pred 37% vs hit 24% at gap 2; 2026: 32%
+vs 27%). Correction multipliers derived from the 2025 leg only
+(gap-2 x0.65, gap-3 x1.10, 4-6 x1.05, 7+ x0.72, gap-1 x0.5) and validated
+out-of-sample on 2026: 7.6 -> 7.9 hits/show. Full-pipeline backtest:
+37.2% -> 38.1% (naive 26.9%). Derivation: experiment_calibration.py
+(single-fit, memory-light).

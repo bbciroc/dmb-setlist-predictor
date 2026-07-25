@@ -37,6 +37,20 @@ HALF_LIFE = float("inf")   # recency decay disabled: backtests showed flat
                            # tour frequency predicts better (pool is stable)
 MODEL = "table"            # "table" (2-D empirical hazard) or "lr"
 
+# Second-stage calibration: the raw hazard table systematically overprices
+# gap-2 picks and underprices the 3-6 show "due" zone. Multipliers derived
+# out-of-sample from the 2025 leg (experiment_calibration.py) and validated
+# on 2026 (+0.3 hits/show, 7.6 -> 7.9).
+GAP_CALIB = {"1": 0.5, "2": 0.65, "3": 1.10, "4-6": 1.05, "7+": 0.72}
+
+
+def gap_calibration(gap) -> float:
+    if gap is None:
+        return 1.0
+    b = str(gap) if gap <= 3 else ("4-6" if gap <= 6 else "7+")
+    return GAP_CALIB.get(b, 1.0)
+
+
 def bucket(gap: int) -> str:
     if gap <= 3:
         return str(gap)
@@ -352,7 +366,8 @@ def predict(shows, target_date: str) -> dict:
         rate = ((plays_tour[song] + SMOOTH_SHOWS * freq_prior[song])
                 / (n_tour + SMOOTH_SHOWS))
         own = hazard_model.gap_stats(play_idx[song])
-        prob[song] = score(rate, prior_rate[song], gap, own)
+        p = score(rate, prior_rate[song], gap, own)
+        prob[song] = min(0.97, p * gap_calibration(gap))
 
     # slot propensities (tour-weighted, prior year as light backfill)
     def slot_counts(extract):
