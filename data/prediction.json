@@ -163,16 +163,6 @@
    "plays_tour": 7
   },
   {
-   "song": "Don't Drink the Water",
-   "prob": 0.185,
-   "plays_tour": 10
-  },
-  {
-   "song": "Satellite",
-   "prob": 0.185,
-   "plays_tour": 11
-  },
-  {
    "song": "Pantala Naga Pampa",
    "prob": 0.185,
    "plays_tour": 9
@@ -183,7 +173,17 @@
    "plays_tour": 10
   },
   {
-   "song": "Jimi Thing",
+   "song": "Don't Drink the Water",
+   "prob": 0.185,
+   "plays_tour": 10
+  },
+  {
+   "song": "Satellite",
+   "prob": 0.185,
+   "plays_tour": 11
+  },
+  {
+   "song": "Everyday",
    "prob": 0.18,
    "plays_tour": 8
   },
