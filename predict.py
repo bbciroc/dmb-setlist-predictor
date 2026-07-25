@@ -370,19 +370,35 @@ def predict(shows, target_date: str) -> dict:
                 for s in total_plays}
 
     pos = position_stats(tour, prior)
-    enc_pos = encore_position(history)
+    enc_pos = encore_position(tour + prior[-90:])
     rules = segue_rules(history)
 
     n_main = int(statistics.median(len(main_set(s)) for s in tour))
     n_enc = int(statistics.median(len(encore(s)) for s in tour)) or 1
 
-    # Encore slots are reserved for true encore-propensity songs (encore
-    # grammar is near-deterministic); the rest is membership-first — the
-    # top main-set songs by probability ARE the prediction (backtested
-    # +0.4 hits vs reserving opener/closer picks from slot pools).
-    enc_songs = sorted(
-        (s for s in prob if encores.get(s, 0.0) >= 1.0),
-        key=lambda s: prob[s] * enc_prop.get(s, 0.0), reverse=True)[:n_enc]
+    # Encore grammar is two-role and near-deterministic: 88 of ~123 recent
+    # multi-song encores are exactly [slow/solo opener -> full-band closer]
+    # (Peace on Earth opens 16/16; Watchtower/Two Step/Ants close). Pick
+    # one song per role; any extra slots fill by overall encore propensity.
+    def enc_role_pick(role_idx, taken):
+        cands = [s for s in prob
+                 if enc_pos.get(s, (0, 0, 0))[role_idx] >= 2
+                 and s not in taken]
+        if not cands:
+            return None
+        return max(cands,
+                   key=lambda s: prob[s] * enc_pos[s][role_idx])
+
+    enc_close = enc_role_pick(1, set())
+    enc_open = enc_role_pick(0, {enc_close}) if n_enc >= 2 else None
+    enc_songs = [s for s in (enc_open, enc_close) if s]
+    for s in sorted(prob, key=lambda x: prob[x] * enc_prop.get(x, 0.0),
+                    reverse=True):
+        if len(enc_songs) >= n_enc:
+            break
+        if s not in enc_songs and encores.get(s, 0.0) >= 1.0:
+            enc_songs.insert(-1, s)   # extras go between opener and closer
+
     members = [s for s in sorted(prob, key=prob.get, reverse=True)
                if s not in enc_songs][:n_main]
     chosen = set(members) | set(enc_songs)
@@ -398,12 +414,6 @@ def predict(shows, target_date: str) -> dict:
     closer = [best_for(closers, rest)]
     middle = [s for s in rest if s not in closer]
     middle.sort(key=lambda s: pos.get(s, 0.5))
-
-    # encore runs in its own order: openers (by open share) before closers
-    def enc_key(song):
-        opens, closes, apps = enc_pos.get(song, (0, 0, 0))
-        return (closes - opens) / apps if apps else 0.0
-    enc_songs.sort(key=enc_key)
 
     main_order = apply_segues(opener + middle + closer, rules, prob,
                               protected={*opener, *closer})

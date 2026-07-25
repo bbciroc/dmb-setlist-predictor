@@ -16,11 +16,18 @@
  },
  "setlist": [
   {
-   "song": "Ants Marching",
+   "song": "Pantala Naga Pampa",
    "slot": "opener",
-   "prob": 0.472,
-   "plays_tour": 12,
-   "shows_since_played": 4
+   "prob": 0.349,
+   "plays_tour": 9,
+   "shows_since_played": 2
+  },
+  {
+   "song": "Rapunzel",
+   "slot": "main",
+   "prob": 0.143,
+   "plays_tour": 7,
+   "shows_since_played": 2
   },
   {
    "song": "American Baby",
@@ -56,6 +63,13 @@
    "prob": 0.326,
    "plays_tour": 9,
    "shows_since_played": 4
+  },
+  {
+   "song": "#41",
+   "slot": "main",
+   "prob": 0.261,
+   "plays_tour": 12,
+   "shows_since_played": 1
   },
   {
    "song": "Fool in the Rain",
@@ -114,20 +128,6 @@
    "shows_since_played": 1
   },
   {
-   "song": "Pantala Naga Pampa",
-   "slot": "main",
-   "prob": 0.349,
-   "plays_tour": 9,
-   "shows_since_played": 2
-  },
-  {
-   "song": "Rapunzel",
-   "slot": "main",
-   "prob": 0.143,
-   "plays_tour": 7,
-   "shows_since_played": 2
-  },
-  {
    "song": "The Best of What's Around",
    "slot": "main",
    "prob": 0.384,
@@ -149,31 +149,26 @@
    "shows_since_played": 3
   },
   {
-   "song": "All That I Wanted",
+   "song": "Ants Marching",
    "slot": "encore",
-   "prob": 0.131,
-   "plays_tour": 4,
-   "shows_since_played": 8
+   "prob": 0.472,
+   "plays_tour": 12,
+   "shows_since_played": 4
   }
  ],
  "bubble": [
-  {
-   "song": "Dreamgirl",
-   "prob": 0.26,
-   "plays_tour": 7
-  },
   {
    "song": "American Baby Intro",
    "prob": 0.244,
    "plays_tour": 3
   },
   {
-   "song": "When the World Ends",
+   "song": "So Right",
    "prob": 0.232,
    "plays_tour": 6
   },
   {
-   "song": "So Right",
+   "song": "When the World Ends",
    "prob": 0.232,
    "plays_tour": 6
   },
@@ -188,11 +183,6 @@
    "plays_tour": 11
   },
   {
-   "song": "Kill the Preacher",
-   "prob": 0.226,
-   "plays_tour": 5
-  },
-  {
    "song": "Broken Things",
    "prob": 0.226,
    "plays_tour": 7
@@ -203,9 +193,19 @@
    "plays_tour": 5
   },
   {
+   "song": "Kill the Preacher",
+   "prob": 0.226,
+   "plays_tour": 5
+  },
+  {
    "song": "Stay or Leave",
    "prob": 0.226,
    "plays_tour": 8
+  },
+  {
+   "song": "Walk Around the Moon",
+   "prob": 0.185,
+   "plays_tour": 7
   }
  ]
 }

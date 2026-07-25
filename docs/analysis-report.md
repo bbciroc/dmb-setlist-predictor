@@ -81,3 +81,15 @@ slot pools let 11 years of history outvote the current tour on
 opener/closer/encore choices — fixed by capping all prior windows at the
 most recent 90 shows, making predictions invariant to scrape depth. The
 full 2015–2026 dataset is kept for analyses.
+
+## Encore two-role grammar (user-spotted, verified)
+
+Recent encores are structurally [slow/solo opener -> full-band closer]:
+88 of ~123 multi-song encores 2024-2026 are exactly that pattern, and
+nearly all others still open with an O-type and close with a C-type.
+Role pools: openers = Peace on Earth (16), Some Devil (15), Rye Whiskey
+(14), Just Breathe, Sister; closers = Watchtower (16), Two Step (15),
+Grey Street (9), The Last Stop, Ants Marching, Crush. Encore construction
+now picks one song per role (prob x role count, windowed to ~90 shows).
+Effect: backtest 36.2% -> 36.9%, order corr 0.24 -> 0.44, and encores
+always contain a closer-type banger.
