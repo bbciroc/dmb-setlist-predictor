@@ -15,7 +15,7 @@ FONT = str(ROOT / "assets" / "PermanentMarker-Regular.ttf")
 
 SHORT = {
     "Ants Marching": "ANTS", "Pantala Naga Pampa": "PNP",
-    "Rapunzel": "RAPUNZAL", "Madman's Eyes": "MADMAN'S",
+    "Rapunzel": "RAPUNZEL", "Madman's Eyes": "MADMAN'S",
     "Fool in the Rain": "FOOL", "What Would You Say": "WHAT WOULD",
     "Dancing Nancies": "NANCIES", "The Stone": "STONE",
     "Don't Drink the Water": "DON'T DRINK", "Grey Street": "GREY ST",
