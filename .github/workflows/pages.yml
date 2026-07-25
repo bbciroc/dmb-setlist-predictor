@@ -40,12 +40,16 @@ jobs:
           python3 build_site.py
           python3 make_sheet_image.py
 
-      - name: Commit updated data back to main
+      # Only shows.json is committed back (scrape state). Generated files
+      # (prediction.json, site/) deploy via the Pages artifact and stay out
+      # of git so daily runs never conflict with local work.
+      - name: Commit updated show data back to main
         run: |
           git config user.name "setlist-bot"
           git config user.email "actions@github.com"
-          git add data/shows.json data/prediction.json site/
-          git diff --cached --quiet || git commit -m "Auto-refresh: $(date -u +%F)"
+          git add data/shows.json
+          git diff --cached --quiet || git commit -m "Show data: $(date -u +%F)"
+          git pull --rebase origin main
           git push
 
       - uses: actions/upload-pages-artifact@v3
