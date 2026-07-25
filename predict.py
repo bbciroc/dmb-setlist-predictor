@@ -201,6 +201,31 @@ def encore_position(history):
     return stats
 
 
+def predecessor_rules(history, min_obs=5, concentration=0.5):
+    """Setup->payoff pairs: songs usually led into by a specific song.
+
+    Returns {B: (A, share)} where A immediately precedes B in >= `share`
+    (>= concentration) of B's non-opener main-set plays over recent shows
+    — e.g. Big Eyed Fish -> Bartender (3/3 in 2026, 11/16 since 2024).
+    """
+    recent = history[-90:]
+    prev_counts = defaultdict(lambda: defaultdict(int))
+    plays = defaultdict(int)
+    for s in recent:
+        seq = main_set(s)
+        for a, b in zip(seq, seq[1:]):
+            prev_counts[b][a] += 1
+            plays[b] += 1
+    rules = {}
+    for b, n in plays.items():
+        if n < min_obs:
+            continue
+        a, c = max(prev_counts[b].items(), key=lambda kv: kv[1])
+        if c / n >= concentration:
+            rules[b] = (a, c / n)
+    return rules
+
+
 def exclusion_lifts(legs, min_exp=3.5, max_lift=0.75):
     """Pairs that co-occur much less than independence predicts.
 
@@ -429,11 +454,34 @@ def predict(shows, target_date: str) -> dict:
             return max(pool, key=lambda s: prob[s])
         return max(scored, key=lambda s: prob[s] * slot_counts[s])
 
+    # Predecessor (setup->payoff) rules: if a picked song is usually led
+    # into by a specific song, pull the setup in — but only when its
+    # implied probability (prob[payoff] x lead-in share) beats the weakest
+    # unprotected pick it would replace. Statistically-likely by
+    # construction: expected hits never decrease.
+    pred_rules = predecessor_rules(history)
+    for b, (a, share) in pred_rules.items():
+        if b in members and a not in members and a not in enc_songs:
+            implied = prob.get(b, 0.0) * share
+            weakest = min((m for m in members
+                           if m != b and m not in pred_rules),
+                          key=lambda m: prob.get(m, 0.0), default=None)
+            if weakest and implied > prob.get(weakest, 0.0):
+                members[members.index(weakest)] = a
+                prob.setdefault(a, implied)
+                chosen.discard(weakest)
+                chosen.add(a)
+
     opener = [best_for(openers, members)]
     rest = [s for s in members if s not in opener]
     closer = [best_for(closers, rest)]
     middle = [s for s in rest if s not in closer]
     middle.sort(key=lambda s: pos.get(s, 0.5))
+    # place each setup song directly before its payoff
+    for b, (a, _share) in pred_rules.items():
+        if a in middle and b in middle:
+            middle.remove(a)
+            middle.insert(middle.index(b), a)
 
     main_order = apply_segues(opener + middle + closer, rules, prob,
                               protected={*opener, *closer})

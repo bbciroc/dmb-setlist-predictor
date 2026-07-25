@@ -93,6 +93,13 @@
    "shows_since_played": 3
   },
   {
+   "song": "Broken Things",
+   "slot": "main",
+   "prob": 0.269,
+   "plays_tour": 7,
+   "shows_since_played": 3
+  },
+  {
    "song": "Kill the Preacher",
    "slot": "main",
    "prob": 0.256,
@@ -105,13 +112,6 @@
    "prob": 0.395,
    "plays_tour": 8,
    "shows_since_played": 5
-  },
-  {
-   "song": "Broken Things",
-   "slot": "main",
-   "prob": 0.269,
-   "plays_tour": 7,
-   "shows_since_played": 3
   },
   {
    "song": "So Right",
@@ -168,6 +168,11 @@
    "plays_tour": 10
   },
   {
+   "song": "Satellite",
+   "prob": 0.185,
+   "plays_tour": 11
+  },
+  {
    "song": "Pantala Naga Pampa",
    "prob": 0.185,
    "plays_tour": 9
@@ -178,12 +183,7 @@
    "plays_tour": 10
   },
   {
-   "song": "Satellite",
-   "prob": 0.185,
-   "plays_tour": 11
-  },
-  {
-   "song": "You Might Die Trying",
+   "song": "Jimi Thing",
    "prob": 0.18,
    "plays_tour": 8
   },
@@ -193,7 +193,7 @@
    "plays_tour": 8
   },
   {
-   "song": "Everyday",
+   "song": "You Might Die Trying",
    "prob": 0.18,
    "plays_tour": 8
   },
