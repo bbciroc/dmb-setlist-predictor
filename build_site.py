@@ -61,6 +61,10 @@ def main() -> None:
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DMB Setlist Predictor &mdash; {pred["target_date"]}</title>
+<meta property="og:title" content="DMB Predicted Setlist &mdash; {pred["target_date"]}">
+<meta property="og:description" content="{html.escape(where)} &middot; rotation-model prediction from {pred["n_tour_shows"]} shows this tour">
+<meta property="og:image" content="https://bbciroc.github.io/dmb-setlist-predictor/sheet.png">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 :root {{ color-scheme: dark; }}
 * {{ box-sizing: border-box; margin: 0; }}

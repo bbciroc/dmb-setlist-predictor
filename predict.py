@@ -490,16 +490,31 @@ def backtest(shows, n_holdout: int) -> None:
           if order_corrs else "no order data")
 
 
+def next_show_date() -> str:
+    """First scheduled show (empty setlist) after the last played one."""
+    all_shows = json.loads((ROOT / "data" / "shows.json").read_text())
+    played = [s["date"] for s in all_shows if s["songs"]]
+    last = max(played)
+    pending = sorted(s["date"] for s in all_shows
+                     if not s["songs"] and s["date"] > last)
+    if not pending:
+        raise SystemExit("no upcoming show found in shows.json")
+    return pending[0]
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--target-date", default="2026-07-25")
+    ap.add_argument("--target-date", default="auto",
+                    help="YYYY-MM-DD, or 'auto' for the next scheduled show")
     ap.add_argument("--backtest", type=int, default=0)
     args = ap.parse_args()
     shows = load_shows()
     if args.backtest:
         backtest(shows, args.backtest)
     else:
-        result = predict(shows, args.target_date)
+        target = (next_show_date() if args.target_date == "auto"
+                  else args.target_date)
+        result = predict(shows, target)
         out = ROOT / "data" / "prediction.json"
         out.write_text(json.dumps(result, indent=1))
         print(json.dumps(result, indent=1))

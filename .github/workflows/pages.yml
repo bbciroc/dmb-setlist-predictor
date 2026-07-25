@@ -1,0 +1,55 @@
+name: Refresh prediction and deploy site
+
+on:
+  schedule:
+    - cron: "0 14 * * *"   # 10am ET daily — after dmbalmanac posts setlists
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Pillow
+        run: pip install pillow
+
+      - name: Incremental scrape (new setlists only)
+        run: python3 scraper.py --incremental
+
+      - name: Predict next show
+        run: python3 predict.py --target-date auto
+
+      - name: Build site + sheet image
+        run: |
+          python3 build_site.py
+          python3 make_sheet_image.py
+
+      - name: Commit updated data back to main
+        run: |
+          git config user.name "setlist-bot"
+          git config user.email "actions@github.com"
+          git add data/shows.json data/prediction.json site/
+          git diff --cached --quiet || git commit -m "Auto-refresh: $(date -u +%F)"
+          git push
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/
+
+      - uses: actions/deploy-pages@v4

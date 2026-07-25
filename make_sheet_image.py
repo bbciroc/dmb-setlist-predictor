@@ -56,6 +56,11 @@ def main() -> None:
     pred = json.loads((ROOT / "data" / "prediction.json").read_text())
     main_songs = [x["song"] for x in pred["setlist"] if x["slot"] != "encore"]
     encore = [x["song"] for x in pred["setlist"] if x["slot"] == "encore"]
+    all_shows = json.loads((ROOT / "data" / "shows.json").read_text())
+    tonight = next((s for s in all_shows
+                    if s["date"] == pred["target_date"]), None)
+    where = (tonight["city"].upper().replace(",", "")
+             if tonight and tonight["city"] else "")
 
     rule = 88                      # 2x scale for sharpness
     top_pad, bottom_pad = int(rule * 1.4), int(rule * 0.9)
@@ -96,7 +101,7 @@ def main() -> None:
     x0 = px + 108
     y = py + top_pad - rule + 14
     draw_rotated_text(img, (x0, y + 18),
-                      f"DMB - {pred['target_date']}  HARTFORD CT",
+                      f"DMB - {pred['target_date']}  {where}".rstrip(),
                       head_font, "#1c1b1e99", -0.5)
     y += rule
     for i, s in enumerate(main_songs):

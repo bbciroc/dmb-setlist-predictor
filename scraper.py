@@ -97,11 +97,28 @@ def parse_show(page: str) -> dict:
 
 
 def main() -> None:
+    # --incremental: keep existing shows.json entries that already have
+    # setlists; only fetch the current year's index and shows that are new
+    # or still empty. Keeps CI runs to a handful of requests.
+    incremental = "--incremental" in sys.argv
+    base: dict[str, dict] = {}
+    shows_path = DATA / "shows.json"
+    if incremental and shows_path.exists():
+        base = {s["id"]: s for s in json.loads(shows_path.read_text())}
+        (CACHE / f"year-{YEARS[-1]}.html").unlink(missing_ok=True)
+
     shows = []
-    for year in YEARS:
+    years = YEARS[-1:] if incremental else YEARS
+    for year in years:
         rows = year_rows(year)
         print(f"{year}: {len(rows)} full-band shows listed", file=sys.stderr)
         for show_id, tid, date in rows:
+            cached = base.get(show_id)
+            if cached and cached["songs"]:
+                shows.append(cached)
+                continue
+            if cached:
+                (CACHE / f"show-{show_id}.html").unlink(missing_ok=True)
             url = f"{BASE}/TourShowSet.aspx?id={show_id}&tid={tid}&where={year}"
             show = parse_show(fetch(url, f"show-{show_id}.html"))
             show.update({"date": date, "id": show_id, "url": url})
@@ -110,9 +127,13 @@ def main() -> None:
                   file=sys.stderr)
             shows.append(show)
 
+    if incremental:
+        fetched_ids = {s["id"] for s in shows}
+        shows.extend(s for s in base.values() if s["id"] not in fetched_ids)
+
     shows.sort(key=lambda s: s["date"])
     DATA.mkdir(parents=True, exist_ok=True)
-    (DATA / "shows.json").write_text(json.dumps(shows, indent=1))
+    shows_path.write_text(json.dumps(shows, indent=1))
     played = sum(1 for s in shows if s["songs"])
     print(f"wrote {len(shows)} shows ({played} with setlists)",
           file=sys.stderr)
