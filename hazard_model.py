@@ -36,7 +36,7 @@ def featurize(rate, prior_rate, gap):
 
 def gap_stats(indices):
     """(mean own gap, gap sd) from a song's play indices, or None."""
-    if len(indices) < 4:
+    if len(indices) < 3:
         return None
     gaps = [b - a for a, b in zip(indices, indices[1:])]
     mu = sum(gaps) / len(gaps)

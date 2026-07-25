@@ -26,7 +26,7 @@ ROOT = pathlib.Path(__file__).parent
 CACHE = ROOT / "data" / "cache"
 DATA = ROOT / "data"
 
-YEARS = [2021, 2022, 2023, 2024, 2025, 2026]
+YEARS = [2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024, 2025, 2026]
 ENCORE_COLORS = {"#660000", "#CC0000"}
 NON_BAND = re.compile(r"Dave solo|Dave &amp; Tim|Guest", re.I)
 
