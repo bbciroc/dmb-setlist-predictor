@@ -163,19 +163,14 @@
    "plays_tour": 7
   },
   {
-   "song": "Pantala Naga Pampa",
-   "prob": 0.185,
-   "plays_tour": 9
-  },
-  {
    "song": "Tripping Billies",
    "prob": 0.185,
    "plays_tour": 10
   },
   {
-   "song": "Don't Drink the Water",
+   "song": "Pantala Naga Pampa",
    "prob": 0.185,
-   "plays_tour": 10
+   "plays_tour": 9
   },
   {
    "song": "Satellite",
@@ -183,9 +178,9 @@
    "plays_tour": 11
   },
   {
-   "song": "Everyday",
-   "prob": 0.18,
-   "plays_tour": 8
+   "song": "Don't Drink the Water",
+   "prob": 0.185,
+   "plays_tour": 10
   },
   {
    "song": "Jimi Thing",
@@ -194,6 +189,11 @@
   },
   {
    "song": "You Might Die Trying",
+   "prob": 0.18,
+   "plays_tour": 8
+  },
+  {
+   "song": "Everyday",
    "prob": 0.18,
    "plays_tour": 8
   },
