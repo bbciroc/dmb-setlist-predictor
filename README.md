@@ -18,7 +18,7 @@ No dependencies beyond Python 3 stdlib and curl.
 ## How the model works
 
 Each song's play probability comes from an empirical hazard table
-(`hazard_model.py`) trained causally on 322 shows, 2021-2026 — full
+(`hazard_model.py`) trained causally on 653 shows, 2015-2026 (windowed priors: last ~90 prior shows drive rates and slots; depth beyond that measured neutral) — full
 analysis in `docs/analysis-report.md`:
 
 - **P(played | frequency tier, gap)** with learned interactions: core

@@ -62,3 +62,22 @@ past shows can get there, including one allowed to cheat.**
   correlated with the printed setlist.
 - Tour-opener effects after breaks, album-cycle debuts (marginal).
 - Live-updating during the show (first songs known → conditional resample).
+
+## Training-depth experiment (2015 vs 2018 vs 2021 cutoff)
+
+Same 15-show rolling backtest on the 2026 leg, training history cut at
+three depths:
+
+| Cutoff | Training shows | Hit rate |
+|---|---|---|
+| 2021 | 322 | 36.2% |
+| 2018 | 474 | 35.6% |
+| 2015 | 653 | 36.2% |
+
+Depth is a wash: the hazard shape (how core/regular/rare songs cycle) is
+stable across eras and saturates with ~5 years of data, while the features
+that drive picks are tour-local. One side effect mattered: un-windowed
+slot pools let 11 years of history outvote the current tour on
+opener/closer/encore choices — fixed by capping all prior windows at the
+most recent 90 shows, making predictions invariant to scrape depth. The
+full 2015–2026 dataset is kept for analyses.

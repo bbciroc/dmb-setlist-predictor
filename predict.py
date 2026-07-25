@@ -281,7 +281,8 @@ def predict(shows, target_date: str) -> dict:
     tour = legs[-1]          # the current contiguous tour leg
     tour_ids = {id(s) for s in tour}
     prior = [s for s in history if id(s) not in tour_ids]
-    n_tour, n_prior = len(tour), max(len(prior), 1)
+    n_tour = len(tour)
+    n_prior = max(min(len(prior), 90), 1)
 
     plays_tour = defaultdict(int)
     plays_prior = defaultdict(int)
@@ -293,7 +294,10 @@ def predict(shows, target_date: str) -> dict:
         for song in set(s["songs"]):
             plays_tour[song] += 1
             weighted[song] += w
-    for s in prior:
+    # cap the frequency prior at the most recent 90 prior shows (~2 tours)
+    # so predictions don't drift when deeper history is scraped
+    prior_window = prior[-90:]
+    for s in prior_window:
         for song in set(s["songs"]):
             plays_prior[song] += 1
 
@@ -347,11 +351,13 @@ def predict(shows, target_date: str) -> dict:
 
     # slot propensities (tour-weighted, prior year as light backfill)
     def slot_counts(extract):
+        # prior window capped at 90 shows so slot behavior stays tour-first
+        # no matter how deep the scraped history goes
         c = defaultdict(float)
         for s in tour:
             for song in extract(s):
                 c[song] += 1.0
-        for s in prior:
+        for s in prior[-90:]:
             for song in extract(s):
                 c[song] += 0.25
         return c
