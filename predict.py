@@ -28,11 +28,14 @@ import re
 import statistics
 from collections import defaultdict
 
+import hazard_model
+
 ROOT = pathlib.Path(__file__).parent
 SMOOTH_SHOWS = 3.0     # pseudo-shows pulling tour freq toward prior-year freq
 MIN_GAP_EVENTS = 25    # min events per gap bucket before trusting it
 HALF_LIFE = float("inf")   # recency decay disabled: backtests showed flat
                            # tour frequency predicts better (pool is stable)
+MODEL = "table"            # "table" (2-D empirical hazard) or "lr"
 
 def bucket(gap: int) -> str:
     if gap <= 3:
@@ -184,6 +187,60 @@ def encore_position(history):
     return stats
 
 
+def exclusion_lifts(legs, min_exp=3.5, max_lift=0.75):
+    """Pairs that co-occur much less than independence predicts.
+
+    Returns {(x, y): lift < max_lift} pooled over recent tour legs —
+    slot competition like Ants Marching vs Tripping Billies (both climax
+    songs, rarely the same night).
+    """
+    lifts = {}
+    for leg in legs[-3:]:
+        n = len(leg)
+        plays = defaultdict(int)
+        both = defaultdict(int)
+        for s in leg:
+            names = sorted(set(s["songs"]))
+            for x in names:
+                plays[x] += 1
+            for i, x in enumerate(names):
+                for y in names[i + 1:]:
+                    both[(x, y)] += 1
+        for (x, y), obs in list(both.items()) + \
+                [((x, y), 0) for x in plays for y in plays
+                 if x < y and (x, y) not in both]:
+            exp = plays[x] * plays[y] / n
+            if exp >= min_exp:
+                lift = obs / exp
+                if lift <= max_lift:
+                    key = (x, y)
+                    lifts[key] = min(lifts.get(key, 1.0), lift)
+    return lifts
+
+
+def greedy_select(prob, lifts, n, exclude, seed=()):
+    """Pick n songs maximizing approximate joint expected hits: each
+    candidate's probability is discounted by exclusion lifts against songs
+    already in the set (seed = opener/closer/encore picks)."""
+    picked = []
+    context = list(seed)
+    while len(picked) < n:
+        best, best_v = None, -1.0
+        for s, p in prob.items():
+            if s in exclude or s in picked:
+                continue
+            v = p
+            for t in context:
+                v *= lifts.get((min(s, t), max(s, t)), 1.0)
+            if v > best_v:
+                best, best_v = s, v
+        if best is None:
+            break
+        picked.append(best)
+        context.append(best)
+    return picked
+
+
 def apply_segues(order, rules, prob, protected):
     """Reorder/insert so each constrained song is followed by a valid
     follower. Returns (new_order, inserted_count)."""
@@ -248,19 +305,45 @@ def predict(shows, target_date: str) -> dict:
     mult = gap_multipliers(legs)
 
     last_played = {}
+    play_idx = defaultdict(list)
     for i, s in enumerate(tour):
         for song in set(s["songs"]):
             last_played[song] = i
-    never_this_tour_mult = min(mult.values()) if mult else 0.3
+            play_idx[song].append(i)
+
+    # Train the logistic hazard model on all completed history (causal
+    # within each leg), then score tonight's candidates.
+    events = []
+    train_legs = [leg for leg in legs if len(leg) >= 10]
+    for li, leg in enumerate(train_legs):
+        pr = defaultdict(float)
+        prev = [s for lg in train_legs[:li] for s in lg][-90:]
+        for s in prev:
+            for song in set(s["songs"]):
+                pr[song] += 1 / max(len(prev), 1)
+        pool = hazard_model.candidate_pool(leg, pr)
+        events.extend(hazard_model.leg_events(leg, pr, pool))
+    if MODEL == "lr":
+        weights = hazard_model.train(events)
+        score = (lambda r, pr_, g, own=None:
+                 hazard_model.prob(weights, r, pr_, g))
+    else:
+        table = hazard_model.TableModel().fit(events)
+        score = table.prob
+
+    prior_rate = defaultdict(float)
+    recent_prior = prior[-90:]
+    for s in recent_prior:
+        for song in set(s["songs"]):
+            prior_rate[song] += 1 / max(len(recent_prior), 1)
 
     prob = {}
     for song in songs:
-        if song in last_played:
-            g = bucket(n_tour - last_played[song])
-            m = mult.get(g, 1.0)
-        else:
-            m = never_this_tour_mult
-        prob[song] = min(0.99, base[song] * m)
+        gap = (n_tour - last_played[song]) if song in last_played else None
+        rate = ((plays_tour[song] + SMOOTH_SHOWS * freq_prior[song])
+                / (n_tour + SMOOTH_SHOWS))
+        own = hazard_model.gap_stats(play_idx[song])
+        prob[song] = score(rate, prior_rate[song], gap, own)
 
     # slot propensities (tour-weighted, prior year as light backfill)
     def slot_counts(extract):
@@ -301,7 +384,11 @@ def predict(shows, target_date: str) -> dict:
     closer = take({s: prob[s] * closers[s] for s in closers}, 1)
     enc_songs = take({s: prob[s] * enc_prop.get(s, 0.0) ** 0.5 * encores[s]
                       for s in encores}, n_enc)
-    middle = take(prob, n_main - 2)
+    # exclusion_lifts tested ~2 points WORSE on backtest (pairs too noisy
+    # at tour sample sizes) — greedy runs with no lift adjustment.
+    middle = greedy_select(prob, {}, n_main - 2, exclude=chosen,
+                           seed=opener + closer + enc_songs)
+    chosen.update(middle)
     middle.sort(key=lambda s: pos.get(s, 0.5))
 
     # encore runs in its own order: openers (by open share) before closers
