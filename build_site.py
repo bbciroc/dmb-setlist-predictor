@@ -92,6 +92,9 @@ li {{ display: grid; grid-template-columns: 2rem 1fr 9rem 3rem;
 code {{ background: #23262c; padding: .1rem .3rem; border-radius: 3px; }}
 </style></head><body>
 <h1>Dave Matthews Band &mdash; Predicted Setlist</h1>
+<p class="sub"><a href="sheet.png" download="dmb-predicted-setlist.png"
+style="color:#f0b429">&#128247; Grab the handwritten sheet (PNG)</a>
+&mdash; share it with friends</p>
 <p class="sub">{html.escape(where)} &middot;
 {pred["target_date"]} &middot; predicted from {pred["n_tour_shows"]}
 shows this tour + {pred["n_prior_shows"]} prior shows &middot;

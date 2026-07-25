@@ -167,7 +167,7 @@ class TableModel:
     Sparse cells shrink toward the tier's overall play rate.
     """
 
-    def __init__(self, k=12.0):
+    def __init__(self, k=5.0):
         self.k = k
         self.cells = defaultdict(lambda: [0.0, 0.0])
         self.tier_base = defaultdict(lambda: [0.0, 0.0])

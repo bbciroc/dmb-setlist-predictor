@@ -7,4 +7,5 @@ rm -f data/cache/year-2026.html
 python3 scraper.py || exit 1
 python3 predict.py "$@" || exit 1
 python3 build_site.py
+python3 make_sheet_image.py
 echo "Serve with: cd site && python3 -m http.server 8742"
