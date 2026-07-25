@@ -93,3 +93,15 @@ Grey Street (9), The Last Stop, Ants Marching, Crush. Encore construction
 now picks one song per role (prob x role count, windowed to ~90 shows).
 Effect: backtest 36.2% -> 36.9%, order corr 0.24 -> 0.44, and encores
 always contain a closer-type banger.
+
+## Back-to-back bug + era drift (user-spotted)
+
+Warehouse and #41 were predicted the night after they played. Two causes:
+(1) the relative-gap bucket absorbed gap-1 events, diluting the taboo —
+gap 1 now always uses the absolute cell; (2) the table trained on
+2015-2019 data where back-to-back repeats were normal (5-7/night,
+promo-cycle songs like Samurai Cop repeated 39x in 2018) while 2026 is at
+0.8/night (nearly all interludes: PNP, Too Much post-ASTB). Training
+events now carry era-decay weights (0.6^years-ago), so today's no-repeat
+culture sets today's cells. Backtest unchanged (36.9%); predictions no
+longer include last night's songs.

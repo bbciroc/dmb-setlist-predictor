@@ -315,8 +315,11 @@ def predict(shows, target_date: str) -> dict:
             last_played[song] = i
             play_idx[song].append(i)
 
-    # Train the logistic hazard model on all completed history (causal
-    # within each leg), then score tonight's candidates.
+    # Train the hazard model on all completed history (causal within each
+    # leg). Events are era-decayed: rotation culture drifts (back-to-back
+    # repeats fell from ~5/night in 2015-2019 to ~0.8 in 2026), so a leg
+    # from y years ago weighs 0.6^y.
+    target_year = int(target_date[:4])
     events = []
     train_legs = [leg for leg in legs if len(leg) >= 10]
     for li, leg in enumerate(train_legs):
@@ -326,7 +329,9 @@ def predict(shows, target_date: str) -> dict:
             for song in set(s["songs"]):
                 pr[song] += 1 / max(len(prev), 1)
         pool = hazard_model.candidate_pool(leg, pr)
-        events.extend(hazard_model.leg_events(leg, pr, pool))
+        w = max(0.6 ** (target_year - int(leg[0]["date"][:4])), 0.05)
+        events.extend(ev + (w,)
+                      for ev in hazard_model.leg_events(leg, pr, pool))
     if MODEL == "lr":
         weights = hazard_model.train(events)
         score = (lambda r, pr_, g, own=None:

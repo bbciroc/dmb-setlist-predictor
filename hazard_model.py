@@ -175,19 +175,29 @@ class TableModel:
     def key(self, rate, prior_rate, gap, own):
         if gap is None:
             return ("never", rate_tier(prior_rate))
-        if own is not None:
-            b, reg = rel_bucket(gap, own)
-            return (f"rel{b}|{reg}", rate_tier(rate))
-        return (gap_bucket(gap), rate_tier(rate))
+        if gap == 1 or own is None:
+            # gap 1 ALWAYS uses the absolute cell: the back-to-back taboo
+            # is a hard rule that the relative buckets would dilute
+            return (gap_bucket(gap), rate_tier(rate))
+        b, reg = rel_bucket(gap, own)
+        return (f"rel{b}|{reg}", rate_tier(rate))
 
     def fit(self, events):
-        for rate, pr, gap, own, y in events:
+        """events: (rate, prior_rate, gap, own, label[, weight]).
+
+        Weights let recent eras dominate — DMB's no-repeat culture
+        hardened from ~5 back-to-back repeats/night in 2015-2019 to ~0.8
+        in 2026, so old years must not set today's gap-1 cells.
+        """
+        for ev in events:
+            rate, pr, gap, own, y = ev[:5]
+            w = ev[5] if len(ev) > 5 else 1.0
             key = self.key(rate, pr, gap, own)
-            self.cells[key][0] += y
-            self.cells[key][1] += 1
+            self.cells[key][0] += w * y
+            self.cells[key][1] += w
             tb = self.tier_base[key[1]]
-            tb[0] += y
-            tb[1] += 1
+            tb[0] += w * y
+            tb[1] += w
         return self
 
     def prob(self, rate, prior_rate, gap, own=None):
