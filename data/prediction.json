@@ -79,6 +79,13 @@
    "shows_since_played": 2
   },
   {
+   "song": "So Damn Lucky",
+   "slot": "main",
+   "prob": 0.195,
+   "plays_tour": 6,
+   "shows_since_played": 6
+  },
+  {
    "song": "Dancing Nancies",
    "slot": "main",
    "prob": 0.408,
@@ -121,13 +128,6 @@
    "shows_since_played": 4
   },
   {
-   "song": "Mercy",
-   "slot": "main",
-   "prob": 0.195,
-   "plays_tour": 7,
-   "shows_since_played": 6
-  },
-  {
    "song": "The Best of What's Around",
    "slot": "main",
    "prob": 0.418,
@@ -158,9 +158,19 @@
  ],
  "bubble": [
   {
-   "song": "So Damn Lucky",
+   "song": "Mercy",
    "prob": 0.195,
-   "plays_tour": 6
+   "plays_tour": 7
+  },
+  {
+   "song": "Don't Drink the Water",
+   "prob": 0.185,
+   "plays_tour": 10
+  },
+  {
+   "song": "Pantala Naga Pampa",
+   "prob": 0.185,
+   "plays_tour": 9
   },
   {
    "song": "Tripping Billies",
@@ -173,27 +183,17 @@
    "plays_tour": 11
   },
   {
-   "song": "Pantala Naga Pampa",
-   "prob": 0.185,
-   "plays_tour": 9
-  },
-  {
-   "song": "Don't Drink the Water",
-   "prob": 0.185,
-   "plays_tour": 10
-  },
-  {
    "song": "You Might Die Trying",
    "prob": 0.18,
    "plays_tour": 8
   },
   {
-   "song": "Everyday",
+   "song": "Jimi Thing",
    "prob": 0.18,
    "plays_tour": 8
   },
   {
-   "song": "Jimi Thing",
+   "song": "Everyday",
    "prob": 0.18,
    "plays_tour": 8
   },
