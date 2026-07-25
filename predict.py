@@ -370,25 +370,27 @@ def predict(shows, target_date: str) -> dict:
     n_main = int(statistics.median(len(main_set(s)) for s in tour))
     n_enc = int(statistics.median(len(encore(s)) for s in tour)) or 1
 
-    chosen = set()
+    # Encore slots are reserved for true encore-propensity songs (encore
+    # grammar is near-deterministic); the rest is membership-first — the
+    # top main-set songs by probability ARE the prediction (backtested
+    # +0.4 hits vs reserving opener/closer picks from slot pools).
+    enc_songs = sorted(
+        (s for s in prob if encores.get(s, 0.0) >= 1.0),
+        key=lambda s: prob[s] * enc_prop.get(s, 0.0), reverse=True)[:n_enc]
+    members = [s for s in sorted(prob, key=prob.get, reverse=True)
+               if s not in enc_songs][:n_main]
+    chosen = set(members) | set(enc_songs)
 
-    def take(pool_score, n):
-        picks = []
-        for song, _ in sorted(pool_score.items(), key=lambda kv: -kv[1]):
-            if song not in chosen and len(picks) < n:
-                picks.append(song)
-                chosen.add(song)
-        return picks
+    def best_for(slot_counts, pool):
+        scored = [s for s in pool if slot_counts.get(s, 0) > 0]
+        if not scored:
+            return max(pool, key=lambda s: prob[s])
+        return max(scored, key=lambda s: prob[s] * slot_counts[s])
 
-    opener = take({s: prob[s] * openers[s] for s in openers}, 1)
-    closer = take({s: prob[s] * closers[s] for s in closers}, 1)
-    enc_songs = take({s: prob[s] * enc_prop.get(s, 0.0) ** 0.5 * encores[s]
-                      for s in encores}, n_enc)
-    # exclusion_lifts tested ~2 points WORSE on backtest (pairs too noisy
-    # at tour sample sizes) — greedy runs with no lift adjustment.
-    middle = greedy_select(prob, {}, n_main - 2, exclude=chosen,
-                           seed=opener + closer + enc_songs)
-    chosen.update(middle)
+    opener = [best_for(openers, members)]
+    rest = [s for s in members if s not in opener]
+    closer = [best_for(closers, rest)]
+    middle = [s for s in rest if s not in closer]
     middle.sort(key=lambda s: pos.get(s, 0.5))
 
     # encore runs in its own order: openers (by open share) before closers

@@ -27,9 +27,13 @@ before the target night; 20 songs predicted per show.
 2. Freq × global gap multiplier + slots/segues: **36.7%** (≈7.3/20)
 3. Logistic regression (rate, gap buckets, rate×gap1, prior rate): 35.7%
 4. 2-D empirical hazard table (tier × gap): 36.2%
-5. + own-period relative-gap cells: **~35–37%** (≈7.1–7.5/20)
+5. + own-period relative-gap cells: ~35–37%
+6. + membership-first assembly (top-20 by probability IS the pick;
+   slots assigned within it): **37.0%** hits, order corr 0.25 → **0.39**
+7. Ensemble of table + multiplier models: no change (7.57 = 7.57) — the
+   engines agree on picks; they are extracting the same signal.
 
-All engines converge at ≈7–7.5 of 20. The differences between them are
+All engines converge at ≈7–7.6 of 20. The differences between them are
 within backtest noise; the constraint is the process, not the model.
 
 ## The ceiling

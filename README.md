@@ -17,15 +17,19 @@ No dependencies beyond Python 3 stdlib and curl.
 
 ## How the model works
 
-Each song is scored `smoothed tour frequency x gap multiplier`:
+Each song's play probability comes from an empirical hazard table
+(`hazard_model.py`) trained causally on 322 shows, 2021-2026 — full
+analysis in `docs/analysis-report.md`:
 
-- **Tour frequency** — share of shows on the current tour leg featuring the
-  song, smoothed toward prior-tour frequency (3 pseudo-shows). Tour legs are
-  detected automatically (>21-day break splits a leg).
-- **Gap multiplier** — estimated from history: how the chance of playing a
-  song changes with how many shows ago it was last played. On current data:
-  x0.43 if played last night (the "never back-to-back" rotation), rising to
-  x1.34 when rested 4-6 shows.
+- **P(played | frequency tier, gap)** with learned interactions: core
+  songs repeat back-to-back 77% of the time, regular rotation songs 20%.
+- **Own-period timing**: songs with a stable personal cycle (gap sd < 1)
+  peak at 51% probability when 1.2-1.6x overdue vs their own mean gap.
+- **Tour legs** detected automatically (>21-day break splits a leg);
+  smoothing toward prior-tour rates handles early-tour uncertainty and
+  deep-cut returns.
+- **Membership-first assembly**: the top-18 main-set songs by probability
+  are the pick; encore slots reserved for true encore-propensity songs.
 - **Slots** — opener / main-set closer / encore picked by score x empirical
   slot frequency; middle of the set ordered by median position percentile
   from *this tour only* (backtested better than blending prior tours);
@@ -39,10 +43,13 @@ Each song is scored `smoothed tour frequency x gap multiplier`:
   15/15).
 - Song names are normalized ("Too Much [fake]" -> "Too Much").
 
-Backtest (last 10 shows of the 2026 summer tour): 37% of played songs
-predicted vs 29% for a most-played-songs baseline; mean Spearman rank
-correlation of predicted vs actual order 0.28. DMB rotates ~170 songs a
-tour, so those gaps are meaningful.
+Rolling backtest (last 20 shows of the 2026 summer tour, each predicted
+from prior history only): 37% of played songs predicted vs 27% for a
+most-played-songs baseline; mean Spearman rank correlation of predicted vs
+actual order 0.33-0.39. For scale, an oracle trained on the target shows
+themselves averages just 40% (7.9/20) — DMB's nightly draw from a ~90-song
+active pool caps ANY statistical predictor near 8/20 (see
+`docs/analysis-report.md` for the ceiling evidence).
 
 Data: dmbalmanac.com (setlist.fm and antsmarching.org sit behind bot
 challenges; dmbalmanac is plainly fetchable). Scraped pages are cached in

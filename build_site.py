@@ -108,14 +108,17 @@ last show: {last["date"]}, {last["venue"]}, {last["city"]}</p>
 
 <h2>How it works</h2>
 <div class="method">
-<p>Every song is scored by <code>smoothed tour frequency &times; gap
-multiplier</code>. Tour frequency is how often the song has appeared this
-tour, smoothed toward last tour's rate. The gap multiplier is estimated from
-the data &mdash; how DMB's chance of playing a song changes with how recently
-it was played: {gap_txt}. The famous &ldquo;almost never
-back-to-back&rdquo; rotation shows up as the low multiplier at gap&nbsp;1.</p>
-<p>Opener, set closer, and encore are chosen from empirical slot pools
-(score &times; how often the song appears in that slot). The middle of the
+<p>Every song's probability comes from an empirical hazard table trained
+on 322 shows (2021&ndash;2026): P(played | frequency tier, gap since last
+played), with interactions learned from the data &mdash; core songs repeat
+back-to-back 77% of the time while regular rotation songs do so only 20%,
+and songs with a stable personal cycle peak at 51% when 1.2&ndash;1.6&times;
+overdue vs their own period. Global gap multipliers for reference:
+{gap_txt}.</p>
+<p>The 20 most probable songs form the prediction (membership-first
+&mdash; backtested better than reserving picks for slot specialists);
+opener, set closer, and encore are then assigned within that set from
+empirical slot pools. The middle of the
 set is ordered by each song's median position within main sets
 <em>this tour</em> (tour-only positions order sets twice as well as blending
 older tours &mdash; slotting habits are tour-specific). Set length is the
@@ -129,10 +132,12 @@ grammar</b> &mdash; encore order comes from encore-opener vs encore-closer
 propensity (Peace on Earth has opened all 16 of its encores; Two Step and
 Watchtower close).</p>
 <p>Percentages are the model's estimate that the song is played tonight
-(not that it lands in that exact slot). Backtested on the last 10 shows of
-this tour: 37% of played songs predicted (vs 29% for a naive
-most-played-songs baseline), average rank correlation of song order 0.28.
-Data: dmbalmanac.com.</p>
+(not that it lands in that exact slot). Rolling backtest over the last 20
+shows of this tour: 37% of played songs predicted (vs 27% for a naive
+most-played-songs baseline), average rank correlation of song order 0.39.
+For scale: a cheating oracle trained on the answer averages only 40%
+&mdash; DMB's rotation entropy caps any statistical prediction near 8 of
+20. Data: dmbalmanac.com.</p>
 </div>
 </body></html>"""
 
