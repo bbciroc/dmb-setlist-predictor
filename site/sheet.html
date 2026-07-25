@@ -1,11 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DMB Setlist Predictor &mdash; 2026-07-25</title>
-<meta property="og:title" content="DMB Predicted Setlist &mdash; 2026-07-25">
-<meta property="og:description" content="The Meadows Music Theatre, Hartford, CT &middot; rotation-model prediction from 31 shows this tour">
-<meta property="og:image" content="https://bbciroc.github.io/dmb-setlist-predictor/sheet.png">
-<meta name="twitter:card" content="summary_large_image">
+<title>The Stage Sheet &mdash; 2026-07-25</title>
 <style>
 
 @font-face {
@@ -28,228 +24,25 @@ a:focus-visible, button:focus-visible {
   font-variant-numeric: tabular-nums;
 }
 
-.hero {
-  position: relative; min-height: 46vh;
-  background: url(bg.jpg) center 68% / cover no-repeat #0e0c10;
-  display: flex; flex-direction: column; justify-content: flex-end;
+body { display: flex; flex-direction: column; align-items: center;
+  min-height: 100vh; padding: 2rem 1rem 3rem; }
+img { width: min(460px, 94vw); height: auto;
+  box-shadow: 0 30px 80px rgba(0,0,0,.7); }
+.actions { display: flex; gap: 1rem; align-items: center;
+  margin: 1.6rem 0 0; }
+.dl {
+  background: #e8a33c; color: #0e0c10; text-decoration: none;
+  padding: .65rem 1.2rem; font-weight: 600; font-size: .9rem;
+  letter-spacing: .03em;
 }
-.hero::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg,
-    rgba(14,12,16,.5) 0%, rgba(14,12,16,.15) 40%,
-    rgba(14,12,16,.82) 78%, #0e0c10 100%);
-}
-.hero-inner {
-  position: relative; z-index: 1; width: min(680px, 92vw);
-  margin: 0 auto; padding: 3.5rem 0 1.2rem;
-}
-h1 { font-size: clamp(2rem, 6vw, 3.1rem); letter-spacing: .02em;
-     text-shadow: 0 2px 18px rgba(0,0,0,.8); }
-.show-line { color: #f3e9d6; opacity: .85; font-size: .92rem;
-  margin-top: .35rem; text-shadow: 0 1px 8px rgba(0,0,0,.9); }
-.wrap { width: min(680px, 92vw); margin: 0 auto; padding-bottom: 4rem; }
-.sheet-link {
-  display: inline-block; margin: 1.1rem 0 0; padding: .5rem .9rem;
-  border: 1px solid #e8a33c; color: #e8a33c; text-decoration: none;
-  font-size: .85rem; letter-spacing: .04em;
-}
-.sheet-link:hover { background: #e8a33c; color: #0e0c10; }
-h2 { font-size: 1.35rem; margin: 2.4rem 0 .5rem; color: #e8a33c; }
-h2.enc-h { color: #c14434; }
-ol, ul { list-style: none; padding: 0; }
-li {
-  display: grid; grid-template-columns: 2.2rem 1fr 8.5rem;
-  align-items: center; column-gap: .8rem;
-  padding: .52rem 0; border-bottom: 1px solid #2a2733;
-}
-.num { color: #8b93a3; font-size: .78rem; text-align: right; }
-.song { font-weight: 600; font-size: 1.02rem; }
-.slot { color: #e8a33c; font-size: .72rem; font-weight: 400;
-  letter-spacing: .08em; text-transform: uppercase; margin-left: .4rem; }
-li.enc .slot, li.enc .num { color: #c14434; }
-.meta { display: block; color: #8b93a3; font-size: .72rem;
-  font-weight: 400; margin-top: .1rem; }
-.odds { display: flex; align-items: center; gap: .55rem;
-  justify-self: end; width: 100%; }
-.odds i { display: block; height: 2px; background: #e8a33c;
-  margin-left: auto; }
-li.enc .odds i { background: #c14434; }
-.odds b { font-weight: 500; font-size: .85rem; color: #f3e9d6;
-  min-width: 2ch; text-align: right; }
-.odds b::after { content: "%"; color: #8b93a3; font-size: .7em; }
-ul li { grid-template-columns: 1fr 8.5rem; }
-.method { color: #8b93a3; font-size: .85rem; margin-top: .8rem; }
-.method p { margin: .55rem 0; }
-.method b { color: #f3e9d6; font-weight: 600; }
-footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #2a2733;
-  color: #8b93a3; font-size: .74rem; }
-footer a { color: #8b93a3; }
+.dl:hover { filter: brightness(1.1); }
+.back { color: #8b93a3; font-size: .85rem; text-decoration: none; }
+.back:hover { color: #f3e9d6; }
 </style></head><body>
-
-<div class="hero">
-  <div class="hero-inner">
-    <h1 class="marker">DMB &mdash; HARTFORD, CT</h1>
-    <p class="show-line">The Meadows Music Theatre, Hartford, CT &middot; 2026-07-25
-    &middot; predicted from 31 shows this tour &middot;
-    last show 2026-07-24, The Pavilion at Star Lake</p>
-  </div>
-</div>
-
-<div class="wrap">
-<a class="sheet-link" href="sheet.html">The stage sheet &rarr;</a>
-
-<h2 class="marker">Main set</h2>
-<ol><li>
-  <span class="num mono">01</span>
-  <span class="song">The Stone <span class="slot">opener</span>
-    <span class="meta mono">6x this tour &middot; rested 5 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:41%"></i><b>41</b></span>
-</li><li>
-  <span class="num mono">02</span>
-  <span class="song">Stay or Leave
-    <span class="meta mono">8x this tour &middot; rested 3 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:27%"></i><b>27</b></span>
-</li><li>
-  <span class="num mono">03</span>
-  <span class="song">Dreamgirl
-    <span class="meta mono">7x this tour &middot; rested 3 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:26%"></i><b>26</b></span>
-</li><li>
-  <span class="num mono">04</span>
-  <span class="song">Pig
-    <span class="meta mono">8x this tour &middot; rested 4 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:47%"></i><b>47</b></span>
-</li><li>
-  <span class="num mono">05</span>
-  <span class="song">Cha Cha
-    <span class="meta mono">7x this tour &middot; rested 5 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:34%"></i><b>34</b></span>
-</li><li>
-  <span class="num mono">06</span>
-  <span class="song">Madman&#x27;s Eyes
-    <span class="meta mono">9x this tour &middot; rested 4 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:40%"></i><b>40</b></span>
-</li><li>
-  <span class="num mono">07</span>
-  <span class="song">When the World Ends
-    <span class="meta mono">6x this tour &middot; rested 5 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:24%"></i><b>24</b></span>
-</li><li>
-  <span class="num mono">08</span>
-  <span class="song">Fool in the Rain
-    <span class="meta mono">5x this tour &middot; rested 4 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:41%"></i><b>41</b></span>
-</li><li>
-  <span class="num mono">09</span>
-  <span class="song">What Would You Say
-    <span class="meta mono">11x this tour &middot; rested 2 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:22%"></i><b>22</b></span>
-</li><li>
-  <span class="num mono">10</span>
-  <span class="song">So Damn Lucky
-    <span class="meta mono">6x this tour &middot; rested 6 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:20%"></i><b>20</b></span>
-</li><li>
-  <span class="num mono">11</span>
-  <span class="song">Dancing Nancies
-    <span class="meta mono">9x this tour &middot; rested 3 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:41%"></i><b>41</b></span>
-</li><li>
-  <span class="num mono">12</span>
-  <span class="song">Broken Things
-    <span class="meta mono">7x this tour &middot; rested 3 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:27%"></i><b>27</b></span>
-</li><li>
-  <span class="num mono">13</span>
-  <span class="song">Kill the Preacher
-    <span class="meta mono">5x this tour &middot; rested 5 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:26%"></i><b>26</b></span>
-</li><li>
-  <span class="num mono">14</span>
-  <span class="song">Why I Am
-    <span class="meta mono">8x this tour &middot; rested 5 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:40%"></i><b>40</b></span>
-</li><li>
-  <span class="num mono">15</span>
-  <span class="song">So Right
-    <span class="meta mono">6x this tour &middot; rested 6 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:24%"></i><b>24</b></span>
-</li><li>
-  <span class="num mono">16</span>
-  <span class="song">Bartender
-    <span class="meta mono">5x this tour &middot; rested 4 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:26%"></i><b>26</b></span>
-</li><li>
-  <span class="num mono">17</span>
-  <span class="song">The Best of What&#x27;s Around
-    <span class="meta mono">8x this tour &middot; rested 5 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:42%"></i><b>42</b></span>
-</li><li>
-  <span class="num mono">18</span>
-  <span class="song">Grey Street <span class="slot">set closer</span>
-    <span class="meta mono">11x this tour &middot; rested 4 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:47%"></i><b>47</b></span>
-</li></ol>
-
-<h2 class="marker enc-h">Encore</h2>
-<ol><li class="enc">
-  <span class="num mono">19</span>
-  <span class="song">Peace on Earth
-    <span class="meta mono">7x this tour &middot; rested 3 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:27%"></i><b>27</b></span>
-</li><li class="enc">
-  <span class="num mono">20</span>
-  <span class="song">Ants Marching
-    <span class="meta mono">12x this tour &middot; rested 4 shows</span>
-  </span>
-  <span class="odds mono"><i style="width:49%"></i><b>49</b></span>
-</li></ol>
-
-<h2 class="marker">On the bubble</h2>
-<ul><li><span class="song">Mercy<span class="meta mono">7x this tour</span></span><span class="odds mono"><i style="width:20%"></i><b>20</b></span></li><li><span class="song">Don&#x27;t Drink the Water<span class="meta mono">10x this tour</span></span><span class="odds mono"><i style="width:18%"></i><b>18</b></span></li><li><span class="song">Satellite<span class="meta mono">11x this tour</span></span><span class="odds mono"><i style="width:18%"></i><b>18</b></span></li><li><span class="song">Pantala Naga Pampa<span class="meta mono">9x this tour</span></span><span class="odds mono"><i style="width:18%"></i><b>18</b></span></li><li><span class="song">Tripping Billies<span class="meta mono">10x this tour</span></span><span class="odds mono"><i style="width:18%"></i><b>18</b></span></li><li><span class="song">Jimi Thing<span class="meta mono">8x this tour</span></span><span class="odds mono"><i style="width:18%"></i><b>18</b></span></li><li><span class="song">Jimi Thing<span class="meta mono">8x this tour</span></span><span class="odds mono"><i style="width:18%"></i><b>18</b></span></li><li><span class="song">You Might Die Trying<span class="meta mono">8x this tour</span></span><span class="odds mono"><i style="width:18%"></i><b>18</b></span></li><li><span class="song">American Baby<span class="meta mono">11x this tour</span></span><span class="odds mono"><i style="width:17%"></i><b>17</b></span></li><li><span class="song">Drunken Soldier<span class="meta mono">5x this tour</span></span><span class="odds mono"><i style="width:16%"></i><b>16</b></span></li></ul>
-
-<h2 class="marker">How it works</h2>
-<div class="method">
-<p>Every song's probability comes from an empirical hazard model trained on
-653 shows (2015&ndash;2026): how likely a song is given how often it's
-played this tour, how many shows it has rested, and its own rotation cycle.
-The famous rules fall out of the data &mdash; almost never back-to-back
-(&times;0.5), most likely when a song is 1.2&ndash;1.6&times; overdue on its
-own cycle (up to 51%).</p>
-<p>The 20 most probable songs are the pick; opener, set closer, and encore
-are assigned within them from slot history. The encore follows the grammar
-the band actually uses: a quiet solo opener into a full-band closer
-(Peace on Earth has opened 16 of its 16 encores). Segue pairs
-(Pantala Naga Pampa &rarr; Rapunzel, Big Eyed Fish &rarr; Bartender) are
-learned and enforced when both halves make the cut.</p>
-<p><b>Track record:</b> rolling backtest over the last 20 shows &mdash; 38%
-of the songs played each night were on this page beforehand, vs 27% for
-guessing the tour's most-played songs. A model allowed to cheat with the
-answers only reaches 40%: rotation entropy caps anyone near 8 of 20.</p>
-<p>Data: <a href="https://dmbalmanac.com">dmbalmanac.com</a>. Refreshes
-daily at 10am ET after setlists post.</p>
-</div>
-
-<footer>Photo: Jake Waage, Bonnaroo 2010, <a href="https://commons.wikimedia.org/wiki/File:Dave-matthews-band-bonnaroo-2010.jpg">CC BY-SA 3.0</a> &middot; fan project, not affiliated with the band
-</footer>
+<img src="sheet.png" alt="Predicted setlist for 2026-07-25,
+written like the band's handwritten stage sheet">
+<div class="actions">
+  <a class="dl" href="sheet.png" download="dmb-predicted-setlist-2026-07-25.png">Download the PNG</a>
+  <a class="back" href="index.html">&larr; back to the prediction</a>
 </div>
 </body></html>
