@@ -163,14 +163,14 @@
    "plays_tour": 5
   },
   {
-   "song": "Bartender",
-   "prob": 0.244,
-   "plays_tour": 5
-  },
-  {
    "song": "Stay or Leave",
    "prob": 0.244,
    "plays_tour": 8
+  },
+  {
+   "song": "Bartender",
+   "prob": 0.244,
+   "plays_tour": 5
   },
   {
    "song": "Broken Things",
@@ -188,24 +188,24 @@
    "plays_tour": 7
   },
   {
-   "song": "So Right",
-   "prob": 0.224,
-   "plays_tour": 6
-  },
-  {
    "song": "When the World Ends",
    "prob": 0.224,
    "plays_tour": 6
   },
   {
-   "song": "Mercy",
-   "prob": 0.185,
-   "plays_tour": 7
+   "song": "So Right",
+   "prob": 0.224,
+   "plays_tour": 6
   },
   {
    "song": "So Damn Lucky",
    "prob": 0.185,
    "plays_tour": 6
+  },
+  {
+   "song": "The Space Between",
+   "prob": 0.185,
+   "plays_tour": 5
   }
  ]
 }
