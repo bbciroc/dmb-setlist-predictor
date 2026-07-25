@@ -37,6 +37,14 @@
    "shows_since_played": 3
   },
   {
+   "song": "Black and Blue Bird",
+   "slot": "main",
+   "prob": 0.09,
+   "plays_tour": 3,
+   "shows_since_played": 11,
+   "deep_cut": true
+  },
+  {
    "song": "Pig",
    "slot": "main",
    "prob": 0.473,
@@ -77,13 +85,6 @@
    "prob": 0.217,
    "plays_tour": 11,
    "shows_since_played": 2
-  },
-  {
-   "song": "So Damn Lucky",
-   "slot": "main",
-   "prob": 0.195,
-   "plays_tour": 6,
-   "shows_since_played": 6
   },
   {
    "song": "Dancing Nancies",
@@ -158,12 +159,27 @@
  ],
  "bubble": [
   {
+   "song": "So Damn Lucky",
+   "prob": 0.195,
+   "plays_tour": 6
+  },
+  {
    "song": "Mercy",
    "prob": 0.195,
    "plays_tour": 7
   },
   {
+   "song": "Satellite",
+   "prob": 0.185,
+   "plays_tour": 11
+  },
+  {
    "song": "Tripping Billies",
+   "prob": 0.185,
+   "plays_tour": 10
+  },
+  {
+   "song": "Don't Drink the Water",
    "prob": 0.185,
    "plays_tour": 10
   },
@@ -173,17 +189,7 @@
    "plays_tour": 9
   },
   {
-   "song": "Satellite",
-   "prob": 0.185,
-   "plays_tour": 11
-  },
-  {
-   "song": "Don't Drink the Water",
-   "prob": 0.185,
-   "plays_tour": 10
-  },
-  {
-   "song": "Jimi Thing",
+   "song": "Everyday",
    "prob": 0.18,
    "plays_tour": 8
   },
@@ -193,7 +199,7 @@
    "plays_tour": 8
   },
   {
-   "song": "Everyday",
+   "song": "Jimi Thing",
    "prob": 0.18,
    "plays_tour": 8
   },
@@ -201,11 +207,6 @@
    "song": "American Baby",
    "prob": 0.172,
    "plays_tour": 11
-  },
-  {
-   "song": "Drunken Soldier",
-   "prob": 0.164,
-   "plays_tour": 5
   }
  ]
 }

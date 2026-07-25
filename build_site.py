@@ -55,6 +55,8 @@ def row(item, i):
     pct = round(item["prob"] * 100)
     slot = item["slot"]
     note = {"opener": "opener", "closer": "set closer"}.get(slot, "")
+    if item.get("deep_cut"):
+        note = "deep cut"
     note_html = f' <span class="slot">{note}</span>' if note else ""
     since = item.get("shows_since_played")
     since_txt = ("first of the tour" if since is None

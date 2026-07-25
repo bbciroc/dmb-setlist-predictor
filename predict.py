@@ -36,6 +36,7 @@ MIN_GAP_EVENTS = 25    # min events per gap bucket before trusting it
 HALF_LIFE = float("inf")   # recency decay disabled: backtests showed flat
                            # tour frequency predicts better (pool is stable)
 MODEL = "table"            # "table" (2-D empirical hazard) or "lr"
+RARE_SLOT = True           # reserve one pick for a deep-cut candidate
 
 # Second-stage calibration: the raw hazard table systematically overprices
 # gap-2 picks and underprices the 3-6 show "due" zone. Multipliers derived
@@ -472,6 +473,29 @@ def predict(shows, target_date: str) -> dict:
                 chosen.discard(weakest)
                 chosen.add(a)
 
+    # Deep-cut slot: real 2026 sets average ~2 songs on a 10+ show gap
+    # plus ~2.5 tour debuts; pure probability ranking never picks them.
+    # Swap the weakest pick for the best rare candidate (highest career
+    # rate among gap>=10/never songs). Backtested ~neutral on hits
+    # (top-1 rare hits 24% in 2026 vs the ~20% pick it replaces).
+    if RARE_SLOT:
+        rare = {s: prior_rate[s] for s in prior_rate
+                if s not in chosen
+                and (s not in last_played
+                     or n_tour - last_played[s] >= 10)}
+        if rare:
+            deep_cut = max(rare, key=rare.get)
+            setups = {a for a, _ in pred_rules.values()}
+            swappable = [m for m in members
+                         if m not in pred_rules and m not in setups]
+            weakest = min(swappable, key=lambda m: prob.get(m, 0.0),
+                          default=None)
+            if weakest:
+                members[members.index(weakest)] = deep_cut
+                prob.setdefault(deep_cut, round(prior_rate[deep_cut], 3))
+                chosen.discard(weakest)
+                chosen.add(deep_cut)
+
     opener = [best_for(openers, members)]
     rest = [s for s in members if s not in opener]
     closer = [best_for(closers, rest)]
@@ -495,7 +519,10 @@ def predict(shows, target_date: str) -> dict:
         item["prob"] = round(prob.get(item["song"], 0.0), 3)
         item["plays_tour"] = plays_tour[item["song"]]
         li = last_played.get(item["song"])
-        item["shows_since_played"] = None if li is None else n_tour - li
+        since = None if li is None else n_tour - li
+        item["shows_since_played"] = since
+        if item["slot"] == "main" and (since is None or since >= 10):
+            item["deep_cut"] = True
 
     bubble = [{"song": s, "prob": round(prob[s], 3),
                "plays_tour": plays_tour[s]}

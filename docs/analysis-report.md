@@ -115,3 +115,13 @@ vs 27%). Correction multipliers derived from the 2025 leg only
 out-of-sample on 2026: 7.6 -> 7.9 hits/show. Full-pipeline backtest:
 37.2% -> 38.1% (naive 26.9%). Derivation: experiment_calibration.py
 (single-fit, memory-light).
+
+## Deep-cut slot (user-suggested)
+
+Real sets contain rare songs: 2026 averages 2.1 songs on a 10+ show gap
+plus 2.5 tour debuts per night; the pure probability ranking never picked
+any. A reserved deep-cut slot (best career-rate candidate among
+gap>=10/never songs) would have hit 24% in 2026 / 16% in 2025 — pooled
+~equal to the ~20% marginal pick it replaces; backtest 37.5% vs 37.8%
+without (noise). Kept ON (RARE_SLOT in predict.py) for structural realism,
+labeled "deep cut" on the site.
