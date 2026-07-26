@@ -79,6 +79,11 @@ def main() -> None:
     last = [s for s in played if s["date"] < pred["target_date"]][-1]
     tonight = next((s for s in shows if s["date"] == pred["target_date"]),
                    None)
+    if tonight is None:
+        sched_path = ROOT / "data" / "schedule.json"
+        if sched_path.exists():
+            tonight = next((s for s in json.loads(sched_path.read_text())
+                            if s["date"] == pred["target_date"]), None)
     where = (f'{tonight["venue"]}, {tonight["city"]}' if tonight
              else "next show")
     city = (tonight["city"] if tonight and tonight["city"] else "TONIGHT")

@@ -33,9 +33,25 @@ jobs:
         run: python3 scraper.py --incremental
 
       - name: Predict next show
-        run: python3 predict.py --target-date auto
+        id: predict
+        # Exit 3 = no upcoming show anywhere (offseason) — skip the site
+        # rebuild but still commit fresh show data; anything else is a
+        # real failure.
+        run: |
+          set +e
+          python3 predict.py --target-date auto
+          code=$?
+          set -e
+          if [ "$code" -eq 3 ]; then
+            echo "has_pred=false" >> "$GITHUB_OUTPUT"
+          elif [ "$code" -ne 0 ]; then
+            exit "$code"
+          else
+            echo "has_pred=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Build site + sheet image
+        if: steps.predict.outputs.has_pred == 'true'
         run: |
           python3 build_site.py
           python3 make_sheet_image.py
@@ -53,7 +69,9 @@ jobs:
           git push
 
       - uses: actions/upload-pages-artifact@v3
+        if: steps.predict.outputs.has_pred == 'true'
         with:
           path: site/
 
       - uses: actions/deploy-pages@v4
+        if: steps.predict.outputs.has_pred == 'true'

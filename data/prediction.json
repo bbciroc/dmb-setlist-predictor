@@ -1,212 +1,219 @@
 {
- "target_date": "2026-07-25",
- "n_tour_shows": 31,
+ "target_date": "2026-07-29",
+ "n_tour_shows": 32,
  "n_prior_shows": 622,
  "gap_multipliers": {
-  "1": 0.667,
-  "2": 1.133,
-  "3": 1.251,
-  "4-6": 1.239,
-  "7-12": 0.976,
-  "13+": 0.858
+  "1": 0.666,
+  "2": 1.132,
+  "3": 1.25,
+  "4-6": 1.24,
+  "7-12": 0.982,
+  "13+": 0.856
  },
  "set_length": {
-  "main": 18,
+  "main": 19,
   "encore": 2
  },
  "setlist": [
   {
-   "song": "The Stone",
+   "song": "Don't Drink the Water",
    "slot": "opener",
-   "prob": 0.41,
-   "plays_tour": 6,
-   "shows_since_played": 5
+   "prob": 0.404,
+   "plays_tour": 10,
+   "shows_since_played": 3
   },
   {
    "song": "Stay or Leave",
    "slot": "main",
-   "prob": 0.269,
+   "prob": 0.251,
    "plays_tour": 8,
-   "shows_since_played": 3
+   "shows_since_played": 4
   },
   {
    "song": "Dreamgirl",
    "slot": "main",
-   "prob": 0.265,
+   "prob": 0.415,
+   "plays_tour": 7,
+   "shows_since_played": 4
+  },
+  {
+   "song": "Grace Is Gone",
+   "slot": "main",
+   "prob": 0.267,
    "plays_tour": 7,
    "shows_since_played": 3
   },
   {
-   "song": "Black and Blue Bird",
+   "song": "Walk Around the Moon",
    "slot": "main",
-   "prob": 0.09,
-   "plays_tour": 3,
-   "shows_since_played": 11,
+   "prob": 0.162,
+   "plays_tour": 7,
+   "shows_since_played": 10,
    "deep_cut": true
   },
   {
-   "song": "Pig",
+   "song": "#41",
    "slot": "main",
-   "prob": 0.473,
+   "prob": 0.212,
+   "plays_tour": 12,
+   "shows_since_played": 2
+  },
+  {
+   "song": "Everyday",
+   "slot": "main",
+   "prob": 0.267,
    "plays_tour": 8,
-   "shows_since_played": 4
-  },
-  {
-   "song": "Cha Cha",
-   "slot": "main",
-   "prob": 0.342,
-   "plays_tour": 7,
-   "shows_since_played": 5
-  },
-  {
-   "song": "Madman's Eyes",
-   "slot": "main",
-   "prob": 0.395,
-   "plays_tour": 9,
-   "shows_since_played": 4
-  },
-  {
-   "song": "When the World Ends",
-   "slot": "main",
-   "prob": 0.235,
-   "plays_tour": 6,
-   "shows_since_played": 5
+   "shows_since_played": 3
   },
   {
    "song": "Fool in the Rain",
    "slot": "main",
-   "prob": 0.41,
+   "prob": 0.359,
    "plays_tour": 5,
-   "shows_since_played": 4
+   "shows_since_played": 5
   },
   {
-   "song": "What Would You Say",
+   "song": "Gravedigger",
    "slot": "main",
-   "prob": 0.217,
-   "plays_tour": 11,
-   "shows_since_played": 2
+   "prob": 0.267,
+   "plays_tour": 7,
+   "shows_since_played": 3
   },
   {
    "song": "Dancing Nancies",
    "slot": "main",
-   "prob": 0.408,
+   "prob": 0.411,
    "plays_tour": 9,
+   "shows_since_played": 4
+  },
+  {
+   "song": "Satellite",
+   "slot": "main",
+   "prob": 0.404,
+   "plays_tour": 11,
    "shows_since_played": 3
   },
   {
    "song": "Broken Things",
    "slot": "main",
-   "prob": 0.269,
+   "prob": 0.251,
    "plays_tour": 7,
+   "shows_since_played": 4
+  },
+  {
+   "song": "You Might Die Trying",
+   "slot": "main",
+   "prob": 0.267,
+   "plays_tour": 8,
    "shows_since_played": 3
   },
   {
-   "song": "Kill the Preacher",
+   "song": "Warehouse",
    "slot": "main",
-   "prob": 0.256,
-   "plays_tour": 5,
-   "shows_since_played": 5
-  },
-  {
-   "song": "Why I Am",
-   "slot": "main",
-   "prob": 0.395,
-   "plays_tour": 8,
-   "shows_since_played": 5
-  },
-  {
-   "song": "So Right",
-   "slot": "main",
-   "prob": 0.235,
-   "plays_tour": 6,
-   "shows_since_played": 6
+   "prob": 0.212,
+   "plays_tour": 12,
+   "shows_since_played": 2
   },
   {
    "song": "Bartender",
    "slot": "main",
-   "prob": 0.256,
+   "prob": 0.255,
+   "plays_tour": 5,
+   "shows_since_played": 5
+  },
+  {
+   "song": "Rapunzel",
+   "slot": "main",
+   "prob": 0.267,
+   "plays_tour": 7,
+   "shows_since_played": 3
+  },
+  {
+   "song": "Drunken Soldier",
+   "slot": "main",
+   "prob": 0.255,
    "plays_tour": 5,
    "shows_since_played": 4
   },
   {
    "song": "The Best of What's Around",
    "slot": "main",
-   "prob": 0.418,
+   "prob": 0.236,
    "plays_tour": 8,
-   "shows_since_played": 5
+   "shows_since_played": 6
   },
   {
-   "song": "Grey Street",
+   "song": "Tripping Billies",
    "slot": "closer",
-   "prob": 0.473,
-   "plays_tour": 11,
-   "shows_since_played": 4
+   "prob": 0.404,
+   "plays_tour": 10,
+   "shows_since_played": 3
   },
   {
    "song": "Peace on Earth",
    "slot": "encore",
-   "prob": 0.269,
+   "prob": 0.251,
    "plays_tour": 7,
-   "shows_since_played": 3
+   "shows_since_played": 4
   },
   {
-   "song": "Ants Marching",
+   "song": "Grey Street",
    "slot": "encore",
-   "prob": 0.491,
-   "plays_tour": 12,
-   "shows_since_played": 4
+   "prob": 0.326,
+   "plays_tour": 11,
+   "shows_since_played": 5
   }
  ],
  "bubble": [
   {
-   "song": "So Damn Lucky",
-   "prob": 0.195,
+   "song": "Crush",
+   "prob": 0.187,
+   "plays_tour": 10
+  },
+  {
+   "song": "Crash Into Me",
+   "prob": 0.187,
+   "plays_tour": 11
+  },
+  {
+   "song": "So Much to Say",
+   "prob": 0.187,
+   "plays_tour": 10
+  },
+  {
+   "song": "Lie in Our Graves",
+   "prob": 0.187,
+   "plays_tour": 10
+  },
+  {
+   "song": "Too Much",
+   "prob": 0.187,
+   "plays_tour": 11
+  },
+  {
+   "song": "I Did It",
+   "prob": 0.177,
+   "plays_tour": 11
+  },
+  {
+   "song": "You & Me",
+   "prob": 0.177,
+   "plays_tour": 10
+  },
+  {
+   "song": "So Right",
+   "prob": 0.165,
    "plays_tour": 6
   },
   {
-   "song": "Mercy",
-   "prob": 0.195,
-   "plays_tour": 7
+   "song": "Can't Stop",
+   "prob": 0.153,
+   "plays_tour": 3
   },
   {
-   "song": "Satellite",
-   "prob": 0.185,
-   "plays_tour": 11
-  },
-  {
-   "song": "Tripping Billies",
-   "prob": 0.185,
-   "plays_tour": 10
-  },
-  {
-   "song": "Don't Drink the Water",
-   "prob": 0.185,
-   "plays_tour": 10
-  },
-  {
-   "song": "Pantala Naga Pampa",
-   "prob": 0.185,
-   "plays_tour": 9
-  },
-  {
-   "song": "Everyday",
-   "prob": 0.18,
-   "plays_tour": 8
-  },
-  {
-   "song": "You Might Die Trying",
-   "prob": 0.18,
-   "plays_tour": 8
-  },
-  {
-   "song": "Jimi Thing",
-   "prob": 0.18,
-   "plays_tour": 8
-  },
-  {
-   "song": "American Baby",
-   "prob": 0.172,
-   "plays_tour": 11
+   "song": "Louisiana Bayou",
+   "prob": 0.139,
+   "plays_tour": 4
   }
  ]
 }

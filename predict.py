@@ -26,6 +26,7 @@ import json
 import pathlib
 import re
 import statistics
+import sys
 from collections import defaultdict
 
 import hazard_model
@@ -419,8 +420,11 @@ def predict(shows, target_date: str) -> dict:
     enc_pos = encore_position(tour + prior[-90:])
     rules = segue_rules(history)
 
-    n_main = int(statistics.median(len(main_set(s)) for s in tour))
-    n_enc = int(statistics.median(len(encore(s)) for s in tour)) or 1
+    # Recent form beats tour-wide: sets have stretched as the tour goes on
+    # (last-10 main median 19 vs tour-wide 18 as of late July 2026).
+    recent = tour[-10:]
+    n_main = int(statistics.median(len(main_set(s)) for s in recent))
+    n_enc = int(statistics.median(len(encore(s)) for s in recent)) or 1
 
     # Encore grammar is two-role and near-deterministic: 88 of ~123 recent
     # multi-song encores are exactly [slow/solo opener -> full-band closer]
@@ -580,16 +584,27 @@ def backtest(shows, n_holdout: int) -> None:
           if order_corrs else "no order data")
 
 
-def next_show_date() -> str:
-    """First scheduled show (empty setlist) after the last played one."""
+def next_show_date() -> str | None:
+    """First scheduled show (empty setlist) after the last played one.
+
+    dmbalmanac only lists a show around show day, so between shows we fall
+    back to the announced tour dates in data/schedule.json. Returns None
+    when nothing is left anywhere (offseason).
+    """
     all_shows = json.loads((ROOT / "data" / "shows.json").read_text())
     played = [s["date"] for s in all_shows if s["songs"]]
     last = max(played)
     pending = sorted(s["date"] for s in all_shows
                      if not s["songs"] and s["date"] > last)
-    if not pending:
-        raise SystemExit("no upcoming show found in shows.json")
-    return pending[0]
+    if pending:
+        return pending[0]
+    sched_path = ROOT / "data" / "schedule.json"
+    if sched_path.exists():
+        sched = sorted(s["date"] for s in json.loads(sched_path.read_text())
+                       if s["date"] > last)
+        if sched:
+            return sched[0]
+    return None
 
 
 if __name__ == "__main__":
@@ -604,6 +619,12 @@ if __name__ == "__main__":
     else:
         target = (next_show_date() if args.target_date == "auto"
                   else args.target_date)
+        if target is None:
+            # Exit 3 = "nothing to predict" so CI can skip the site build
+            # without treating it as a failure.
+            print("no upcoming show in shows.json or schedule.json",
+                  file=sys.stderr)
+            raise SystemExit(3)
         result = predict(shows, target)
         out = ROOT / "data" / "prediction.json"
         out.write_text(json.dumps(result, indent=1))
