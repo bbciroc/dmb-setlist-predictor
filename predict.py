@@ -284,7 +284,7 @@ def greedy_select(prob, lifts, n, exclude, seed=()):
 
 def apply_segues(order, rules, prob, protected):
     """Reorder/insert so each constrained song is followed by a valid
-    follower. Returns (new_order, inserted_count)."""
+    follower; trims lowest-prob unprotected songs to offset insertions."""
     order = list(order)
     inserted = 0
     i = 0
@@ -342,7 +342,10 @@ def predict(shows, target_date: str) -> dict:
         for song in set(s["songs"]):
             plays_prior[song] += 1
 
-    songs = set(plays_tour) | set(plays_prior)
+    # sorted: prob/rate dicts get a stable insertion order, so downstream
+    # sorts break ties alphabetically instead of by hash seed — otherwise
+    # CI and local runs produce different setlists from identical data
+    songs = sorted(set(plays_tour) | set(plays_prior))
     freq_prior = {s: plays_prior[s] / n_prior for s in songs}
     base = {s: (weighted[s] + SMOOTH_SHOWS * freq_prior[s])
                / (weight_total + SMOOTH_SHOWS) for s in songs}
@@ -384,7 +387,7 @@ def predict(shows, target_date: str) -> dict:
     prior_rate = defaultdict(float)
     recent_prior = prior[-90:]
     for s in recent_prior:
-        for song in set(s["songs"]):
+        for song in sorted(set(s["songs"])):
             prior_rate[song] += 1 / max(len(recent_prior), 1)
 
     prob = {}
@@ -465,23 +468,41 @@ def predict(shows, target_date: str) -> dict:
     # unprotected pick it would replace. Statistically-likely by
     # construction: expected hits never decrease.
     pred_rules = predecessor_rules(history)
+    added_setups = set()
     for b, (a, share) in pred_rules.items():
         if b in members and a not in members and a not in enc_songs:
-            implied = prob.get(b, 0.0) * share
+            # the setup's own probability counts too: PNP can also open
+            # Pig, so its chance of appearing exceeds the Rapunzel-implied
+            # share alone
+            implied = max(prob.get(a, 0.0), prob.get(b, 0.0) * share)
+            # exclude payoffs AND already-added setups from eviction —
+            # otherwise each swap's low-prob setup becomes the next
+            # rule's "weakest" and the swaps cancel each other out
             weakest = min((m for m in members
-                           if m != b and m not in pred_rules),
+                           if m != b and m not in pred_rules
+                           and m not in added_setups),
                           key=lambda m: prob.get(m, 0.0), default=None)
-            if weakest and implied > prob.get(weakest, 0.0):
+            # share >= 0.6 forces the swap: the sheet is a joint
+            # prediction, and conditional on the payoff actually playing,
+            # its modal intro precedes it far more often than the weakest
+            # marginal pick plays at all (e.g. PNP -> Rapunzel)
+            if weakest and (share >= 0.6
+                            or implied > prob.get(weakest, 0.0)):
                 members[members.index(weakest)] = a
-                prob.setdefault(a, implied)
+                # record the implied prob (setdefault was a no-op: every
+                # song already has a model prob) so the setup ranks at
+                # its real chance of appearing, not its solo chance
+                prob[a] = max(prob.get(a, 0.0), implied)
                 chosen.discard(weakest)
                 chosen.add(a)
+                added_setups.add(a)
 
     # Deep-cut slot: real 2026 sets average ~2 songs on a 10+ show gap
     # plus ~2.5 tour debuts; pure probability ranking never picks them.
     # Swap the weakest pick for the best rare candidate (highest career
     # rate among gap>=10/never songs). Backtested ~neutral on hits
     # (top-1 rare hits 24% in 2026 vs the ~20% pick it replaces).
+    deep_cut = None
     if RARE_SLOT:
         rare = {s: prior_rate[s] for s in prior_rate
                 if s not in chosen
@@ -511,8 +532,11 @@ def predict(shows, target_date: str) -> dict:
             middle.remove(a)
             middle.insert(middle.index(b), a)
 
+    # deep cut is protected: it has the lowest prob by construction, so
+    # the segue-overflow trim would always evict it first
     main_order = apply_segues(opener + middle + closer, rules, prob,
-                              protected={*opener, *closer})
+                              protected={*opener, *closer}
+                              | ({deep_cut} if deep_cut else set()))
     middle = [s for s in main_order if s not in (*opener, *closer)]
 
     setlist = ([{"song": s, "slot": "opener"} for s in opener]
@@ -528,10 +552,13 @@ def predict(shows, target_date: str) -> dict:
         if item["slot"] == "main" and (since is None or since >= 10):
             item["deep_cut"] = True
 
+    # filter against the final setlist, not `chosen`: apply_segues can
+    # insert songs (segue followers) and trim others after selection
+    in_set = {item["song"] for item in setlist}
     bubble = [{"song": s, "prob": round(prob[s], 3),
                "plays_tour": plays_tour[s]}
               for s, _ in sorted(prob.items(), key=lambda kv: -kv[1])
-              if s not in chosen][:10]
+              if s not in in_set][:10]
 
     return {"target_date": target_date,
             "n_tour_shows": n_tour, "n_prior_shows": len(prior),

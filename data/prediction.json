@@ -16,10 +16,17 @@
  },
  "setlist": [
   {
-   "song": "Don't Drink the Water",
+   "song": "Pantala Naga Pampa",
    "slot": "opener",
-   "prob": 0.404,
+   "prob": 0.183,
    "plays_tour": 10,
+   "shows_since_played": 1
+  },
+  {
+   "song": "Rapunzel",
+   "slot": "main",
+   "prob": 0.267,
+   "plays_tour": 7,
    "shows_since_played": 3
   },
   {
@@ -50,13 +57,6 @@
    "plays_tour": 7,
    "shows_since_played": 10,
    "deep_cut": true
-  },
-  {
-   "song": "#41",
-   "slot": "main",
-   "prob": 0.212,
-   "plays_tour": 12,
-   "shows_since_played": 2
   },
   {
    "song": "Everyday",
@@ -101,6 +101,13 @@
    "shows_since_played": 4
   },
   {
+   "song": "Don't Drink the Water",
+   "slot": "main",
+   "prob": 0.404,
+   "plays_tour": 10,
+   "shows_since_played": 3
+  },
+  {
    "song": "You Might Die Trying",
    "slot": "main",
    "prob": 0.267,
@@ -120,13 +127,6 @@
    "prob": 0.255,
    "plays_tour": 5,
    "shows_since_played": 5
-  },
-  {
-   "song": "Rapunzel",
-   "slot": "main",
-   "prob": 0.267,
-   "plays_tour": 7,
-   "shows_since_played": 3
   },
   {
    "song": "Drunken Soldier",
@@ -166,9 +166,9 @@
  ],
  "bubble": [
   {
-   "song": "Crush",
-   "prob": 0.187,
-   "plays_tour": 10
+   "song": "#41",
+   "prob": 0.212,
+   "plays_tour": 12
   },
   {
    "song": "Crash Into Me",
@@ -176,12 +176,17 @@
    "plays_tour": 11
   },
   {
-   "song": "So Much to Say",
+   "song": "Crush",
    "prob": 0.187,
    "plays_tour": 10
   },
   {
    "song": "Lie in Our Graves",
+   "prob": 0.187,
+   "plays_tour": 10
+  },
+  {
+   "song": "So Much to Say",
    "prob": 0.187,
    "plays_tour": 10
   },
@@ -209,11 +214,6 @@
    "song": "Can't Stop",
    "prob": 0.153,
    "plays_tour": 3
-  },
-  {
-   "song": "Louisiana Bayou",
-   "prob": 0.139,
-   "plays_tour": 4
   }
  ]
 }
