@@ -20326,10 +20326,44 @@
  {
   "venue": "Fiddler's Green Amphitheatre",
   "city": "Greenwood Village, CO",
-  "songs": [],
-  "encore_from": null,
+  "songs": [
+   "The Song That Jane Likes",
+   "Pantala Naga Pampa",
+   "Pig",
+   "Busted Stuff",
+   "The Best of What's Around",
+   "Spaceman",
+   "Come On Come On",
+   "Shake Me Like a Monkey",
+   "Stay or Leave",
+   "It Could Happen",
+   "Jimi Thing",
+   "Word Up!",
+   "Long Black Veil",
+   "So Right",
+   "Snow Outside",
+   "Time Bomb",
+   "Drive In Drive Out",
+   "Louisiana Bayou",
+   "Butterfly\u00a0[tease]",
+   "Crash Into Me",
+   "Drunken Soldier",
+   "Stay (Wasting Time)",
+   "Baby Blue",
+   "Tripping Billies"
+  ],
+  "encore_from": 22,
   "date": "2026-08-28",
   "id": "453094357",
   "url": "https://dmbalmanac.com/TourShowSet.aspx?id=453094357&tid=8188&where=2026"
+ },
+ {
+  "venue": "Fiddler's Green Amphitheatre",
+  "city": "Greenwood Village, CO",
+  "songs": [],
+  "encore_from": null,
+  "date": "2026-08-29",
+  "id": "453094358",
+  "url": "https://dmbalmanac.com/TourShowSet.aspx?id=453094358&tid=8188&where=2026"
  }
 ]
