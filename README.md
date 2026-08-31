@@ -25,9 +25,13 @@ analysis in `docs/analysis-report.md`:
   songs repeat back-to-back 77% of the time, regular rotation songs 20%.
 - **Own-period timing**: songs with a stable personal cycle (gap sd < 1)
   peak at 51% probability when 1.2-1.6x overdue vs their own mean gap.
-- **Tour legs** detected automatically (>21-day break splits a leg);
-  smoothing toward prior-tour rates handles early-tour uncertainty and
-  deep-cut returns.
+- **Touring seasons** detected automatically (>45-day break starts a new
+  season). The mid-summer break is *not* a reset: DMB pauses ~4 weeks
+  every August (26-34 days) and returns to the same rotation — setlist
+  overlap across that break matches normal show-to-show overlap, while a
+  real offseason (>50 days) drops it by a third. Smoothing toward
+  prior-season rates handles early-season uncertainty and deep-cut
+  returns.
 - **Membership-first assembly**: the top-18 main-set songs by probability
   are the pick; encore slots reserved for true encore-propensity songs.
 - **Slots** — opener / main-set closer / encore picked by score x empirical

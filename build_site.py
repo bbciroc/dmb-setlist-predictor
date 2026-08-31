@@ -59,8 +59,13 @@ def row(item, i):
         note = "deep cut"
     note_html = f' <span class="slot">{note}</span>' if note else ""
     since = item.get("shows_since_played")
-    since_txt = ("first of the tour" if since is None
-                 else f"rested {since} show{'s' if since != 1 else ''}")
+    last = item.get("last_played")
+    if since is not None:
+        since_txt = f"rested {since} show{'s' if since != 1 else ''}"
+    elif last:
+        since_txt = f"not since {last}"
+    else:
+        since_txt = "never played"
     cls = ' class="enc"' if slot == "encore" else ""
     return f"""<li{cls}>
   <span class="num mono">{i:02d}</span>

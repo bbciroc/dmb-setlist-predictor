@@ -125,3 +125,37 @@ gap>=10/never songs) would have hit 24% in 2026 / 16% in 2025 — pooled
 ~equal to the ~20% marginal pick it replaces; backtest 37.5% vs 37.8%
 without (noise). Kept ON (RARE_SLOT in predict.py) for structural realism,
 labeled "deep cut" on the site.
+
+## The August break is not a new tour (user-spotted, 2026-08-31)
+
+The leg splitter cut the history at any break longer than 21 days. DMB
+pauses its summer tour ~4 weeks every August (27, 27, 27, 28, 26, 34 and
+30 days in 2015-2026), so every year the model woke up in late August with
+a two-show "tour": all frequencies collapsed onto the prior-season
+smoothing, every song that had not played since the break came back as a
+tour debut, and set length was a median over two shows. On 2026-08-31 that
+produced 22 near-identical probabilities (0.12-0.23) and a Rapunzel
+labeled "first of the tour" five weeks after it played.
+
+Continuity across a break, measured as the share of tonight's songs that
+also appeared in the k-th previous show (659 shows, 2015-2026):
+
+| Break before tonight | overlap, shows 2-5 back | n |
+|---|---|---|
+| 0-7 days (normal) | 0.309 | 572 |
+| 8-21 days | 0.295 | 45 |
+| 22-35 days (mid-tour) | 0.302 | 16 |
+| 36-50 days | 0.317 | 3 |
+| 51-75 days | 0.222 | 10 |
+| 76+ days (offseason) | 0.193 | 8 |
+
+Rotation memory survives intact up to ~50 days and only then decays, so
+the split now happens at 45 days (SEASON_GAP_DAYS) and legs are
+"seasons". Even the anti-repeat taboo carries: overlap with the single
+show immediately before a mid-tour break is 0.246, against 0.207 for
+normal back-to-back nights — a small relaxation, not a reset.
+
+Effect on hit rate: shows in the first week after a mid-summer break
+(8 breaks, 2015-2026) go 32.4% -> 37.2%; all 203 shows from 2023 on go
+33.9% -> 34.5%; the in-tour 20-show rolling backtest is unchanged within
+noise (38.1% -> 37.4%, -3 hits of 420).

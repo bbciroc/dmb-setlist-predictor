@@ -1,14 +1,14 @@
 {
- "target_date": "2026-07-29",
- "n_tour_shows": 32,
+ "target_date": "2026-08-31",
+ "n_tour_shows": 35,
  "n_prior_shows": 622,
  "gap_multipliers": {
-  "1": 0.666,
-  "2": 1.132,
-  "3": 1.25,
-  "4-6": 1.24,
-  "7-12": 0.982,
-  "13+": 0.856
+  "1": 0.713,
+  "2": 1.177,
+  "3": 1.302,
+  "4-6": 1.263,
+  "7-12": 0.945,
+  "13+": 0.687
  },
  "set_length": {
   "main": 19,
@@ -16,204 +16,225 @@
  },
  "setlist": [
   {
-   "song": "Pantala Naga Pampa",
+   "song": "Warehouse",
    "slot": "opener",
-   "prob": 0.183,
-   "plays_tour": 10,
-   "shows_since_played": 1
+   "prob": 0.583,
+   "plays_tour": 13,
+   "shows_since_played": 3,
+   "last_played": "2026-07-29"
   },
   {
-   "song": "Rapunzel",
-   "slot": "main",
-   "prob": 0.267,
-   "plays_tour": 7,
-   "shows_since_played": 3
-  },
-  {
-   "song": "Stay or Leave",
-   "slot": "main",
-   "prob": 0.251,
-   "plays_tour": 8,
-   "shows_since_played": 4
-  },
-  {
-   "song": "Dreamgirl",
-   "slot": "main",
-   "prob": 0.415,
-   "plays_tour": 7,
-   "shows_since_played": 4
-  },
-  {
-   "song": "Grace Is Gone",
-   "slot": "main",
-   "prob": 0.267,
-   "plays_tour": 7,
-   "shows_since_played": 3
-  },
-  {
-   "song": "Walk Around the Moon",
-   "slot": "main",
-   "prob": 0.162,
-   "plays_tour": 7,
-   "shows_since_played": 10,
-   "deep_cut": true
-  },
-  {
-   "song": "Everyday",
-   "slot": "main",
-   "prob": 0.267,
-   "plays_tour": 8,
-   "shows_since_played": 3
-  },
-  {
-   "song": "Fool in the Rain",
+   "song": "So Much to Say",
    "slot": "main",
    "prob": 0.359,
-   "plays_tour": 5,
-   "shows_since_played": 5
+   "plays_tour": 10,
+   "shows_since_played": 5,
+   "last_played": "2026-07-24"
+  },
+  {
+   "song": "Anyone Seen the Bridge",
+   "slot": "main",
+   "prob": 0.364,
+   "plays_tour": 8,
+   "shows_since_played": 5,
+   "last_played": "2026-07-24"
+  },
+  {
+   "song": "Too Much",
+   "slot": "main",
+   "prob": 0.313,
+   "plays_tour": 11,
+   "shows_since_played": 5,
+   "last_played": "2026-07-24"
+  },
+  {
+   "song": "Grey Street",
+   "slot": "main",
+   "prob": 0.403,
+   "plays_tour": 12,
+   "shows_since_played": 3,
+   "last_played": "2026-07-29"
+  },
+  {
+   "song": "You & Me",
+   "slot": "main",
+   "prob": 0.435,
+   "plays_tour": 10,
+   "shows_since_played": 5,
+   "last_played": "2026-07-24"
+  },
+  {
+   "song": "Cha Cha",
+   "slot": "main",
+   "prob": 0.4,
+   "plays_tour": 8,
+   "shows_since_played": 4,
+   "last_played": "2026-07-25"
   },
   {
    "song": "Gravedigger",
    "slot": "main",
-   "prob": 0.267,
-   "plays_tour": 7,
-   "shows_since_played": 3
+   "prob": 0.255,
+   "plays_tour": 8,
+   "shows_since_played": 3,
+   "last_played": "2026-07-29"
   },
   {
-   "song": "Dancing Nancies",
+   "song": "So Damn Lucky",
    "slot": "main",
-   "prob": 0.411,
-   "plays_tour": 9,
-   "shows_since_played": 4
+   "prob": 0.268,
+   "plays_tour": 7,
+   "shows_since_played": 4,
+   "last_played": "2026-07-25"
+  },
+  {
+   "song": "When the World Ends",
+   "slot": "main",
+   "prob": 0.268,
+   "plays_tour": 7,
+   "shows_since_played": 4,
+   "last_played": "2026-07-25"
+  },
+  {
+   "song": "Fool in the Rain",
+   "slot": "main",
+   "prob": 0.264,
+   "plays_tour": 6,
+   "shows_since_played": 3,
+   "last_played": "2026-07-29"
+  },
+  {
+   "song": "What Would You Say",
+   "slot": "main",
+   "prob": 0.359,
+   "plays_tour": 12,
+   "shows_since_played": 4,
+   "last_played": "2026-07-25"
   },
   {
    "song": "Satellite",
    "slot": "main",
-   "prob": 0.404,
-   "plays_tour": 11,
-   "shows_since_played": 3
+   "prob": 0.403,
+   "plays_tour": 12,
+   "shows_since_played": 3,
+   "last_played": "2026-07-29"
   },
   {
-   "song": "Broken Things",
+   "song": "Typical Situation",
    "slot": "main",
-   "prob": 0.251,
+   "prob": 0.268,
    "plays_tour": 7,
-   "shows_since_played": 4
+   "shows_since_played": 5,
+   "last_played": "2026-07-24"
+  },
+  {
+   "song": "Sledgehammer",
+   "slot": "main",
+   "prob": 0.364,
+   "plays_tour": 8,
+   "shows_since_played": 5,
+   "last_played": "2026-07-24"
+  },
+  {
+   "song": "Lie in Our Graves",
+   "slot": "main",
+   "prob": 0.313,
+   "plays_tour": 10,
+   "shows_since_played": 5,
+   "last_played": "2026-07-24"
+  },
+  {
+   "song": "Dancing Nancies",
+   "slot": "main",
+   "prob": 0.403,
+   "plays_tour": 10,
+   "shows_since_played": 3,
+   "last_played": "2026-07-29"
+  },
+  {
+   "song": "Let's Dance",
+   "slot": "main",
+   "prob": 0.082,
+   "plays_tour": 3,
+   "shows_since_played": 10,
+   "last_played": "2026-07-14",
+   "deep_cut": true
   },
   {
    "song": "Don't Drink the Water",
-   "slot": "main",
-   "prob": 0.404,
-   "plays_tour": 10,
-   "shows_since_played": 3
-  },
-  {
-   "song": "You Might Die Trying",
-   "slot": "main",
-   "prob": 0.267,
-   "plays_tour": 8,
-   "shows_since_played": 3
-  },
-  {
-   "song": "Warehouse",
-   "slot": "main",
-   "prob": 0.212,
-   "plays_tour": 12,
-   "shows_since_played": 2
-  },
-  {
-   "song": "Bartender",
-   "slot": "main",
-   "prob": 0.255,
-   "plays_tour": 5,
-   "shows_since_played": 5
-  },
-  {
-   "song": "Drunken Soldier",
-   "slot": "main",
-   "prob": 0.255,
-   "plays_tour": 5,
-   "shows_since_played": 4
-  },
-  {
-   "song": "The Best of What's Around",
-   "slot": "main",
-   "prob": 0.236,
-   "plays_tour": 8,
-   "shows_since_played": 6
-  },
-  {
-   "song": "Tripping Billies",
    "slot": "closer",
-   "prob": 0.404,
-   "plays_tour": 10,
-   "shows_since_played": 3
+   "prob": 0.403,
+   "plays_tour": 11,
+   "shows_since_played": 3,
+   "last_played": "2026-07-29"
   },
   {
    "song": "Peace on Earth",
    "slot": "encore",
-   "prob": 0.251,
+   "prob": 0.117,
    "plays_tour": 7,
-   "shows_since_played": 4
+   "shows_since_played": 7,
+   "last_played": "2026-07-18"
   },
   {
-   "song": "Grey Street",
+   "song": "Ants Marching",
    "slot": "encore",
-   "prob": 0.326,
-   "plays_tour": 11,
-   "shows_since_played": 5
+   "prob": 0.556,
+   "plays_tour": 13,
+   "shows_since_played": 4,
+   "last_played": "2026-07-25"
   }
  ],
  "bubble": [
   {
-   "song": "#41",
-   "prob": 0.212,
-   "plays_tour": 12
+   "song": "Grace Is Gone",
+   "prob": 0.255,
+   "plays_tour": 8
+  },
+  {
+   "song": "Rapunzel",
+   "prob": 0.255,
+   "plays_tour": 8
+  },
+  {
+   "song": "The Best of What's Around",
+   "prob": 0.19,
+   "plays_tour": 9
   },
   {
    "song": "Crash Into Me",
-   "prob": 0.187,
+   "prob": 0.189,
+   "plays_tour": 12
+  },
+  {
+   "song": "Jimi Thing",
+   "prob": 0.189,
+   "plays_tour": 10
+  },
+  {
+   "song": "Pantala Naga Pampa",
+   "prob": 0.189,
+   "plays_tour": 12
+  },
+  {
+   "song": "Stay or Leave",
+   "prob": 0.189,
+   "plays_tour": 10
+  },
+  {
+   "song": "Tripping Billies",
+   "prob": 0.189,
    "plays_tour": 11
-  },
-  {
-   "song": "Crush",
-   "prob": 0.187,
-   "plays_tour": 10
-  },
-  {
-   "song": "Lie in Our Graves",
-   "prob": 0.187,
-   "plays_tour": 10
-  },
-  {
-   "song": "So Much to Say",
-   "prob": 0.187,
-   "plays_tour": 10
-  },
-  {
-   "song": "Too Much",
-   "prob": 0.187,
-   "plays_tour": 11
-  },
-  {
-   "song": "I Did It",
-   "prob": 0.177,
-   "plays_tour": 11
-  },
-  {
-   "song": "You & Me",
-   "prob": 0.177,
-   "plays_tour": 10
-  },
-  {
-   "song": "So Right",
-   "prob": 0.165,
-   "plays_tour": 6
   },
   {
    "song": "Can't Stop",
-   "prob": 0.153,
+   "prob": 0.176,
    "plays_tour": 3
+  },
+  {
+   "song": "You Might Die Trying",
+   "prob": 0.17,
+   "plays_tour": 8
   }
  ]
 }

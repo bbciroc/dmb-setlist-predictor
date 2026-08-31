@@ -38,6 +38,9 @@ HALF_LIFE = float("inf")   # recency decay disabled: backtests showed flat
                            # tour frequency predicts better (pool is stable)
 MODEL = "table"            # "table" (2-D empirical hazard) or "lr"
 RARE_SLOT = True           # reserve one pick for a deep-cut candidate
+SEASON_GAP_DAYS = 45       # break longer than this = new touring season
+                           # (mid-tour August breaks run 26-34 days and the
+                           # rotation carries straight through them)
 
 # Second-stage calibration: the raw hazard table systematically overprices
 # gap-2 picks and underprices the 3-6 show "due" zone. Multipliers derived
@@ -86,8 +89,18 @@ def encore(show) -> list:
     return show["songs"][e:] if e is not None else []
 
 
-def segments(shows, max_gap_days=21):
-    """Split chronologically sorted shows into contiguous tour legs."""
+def segments(shows, max_gap_days=SEASON_GAP_DAYS):
+    """Split chronologically sorted shows into touring seasons.
+
+    A season, not a leg: DMB breaks its summer tour for ~4 weeks every
+    August (27, 27, 28, 26, 34, 30 days in 2015-2026) and comes back to
+    the same rotation. Setlist overlap with the shows before such a break
+    matches normal show-to-show overlap (0.30 vs 0.31 for shows 2-5 back),
+    while a real offseason (>50 days) drops it to 0.19-0.22 and flattens.
+    So only breaks longer than SEASON_GAP_DAYS reset the rotation;
+    splitting on the mid-tour break instead discarded the whole first leg
+    and left the model with a two-show history every August.
+    """
     import datetime
     legs, leg = [], []
     prev = None
@@ -287,6 +300,10 @@ def apply_segues(order, rules, prob, protected):
     follower; trims lowest-prob unprotected songs to offset insertions."""
     order = list(order)
     inserted = 0
+    # a song may be pulled in as a follower only once: rules can form
+    # cycles (All Along the Watchtower -> Stairway to Heaven -> All Along
+    # the Watchtower), and re-inserting round the cycle never terminates
+    inserted_songs = set()
     i = 0
     while i < len(order) - 1:  # last main-set song has no follower
         a = order[i]
@@ -298,8 +315,9 @@ def apply_segues(order, rules, prob, protected):
                 b = max(present, key=lambda x: prob.get(x, 0))
                 order.remove(b)
                 order.insert(i + 1, b)
-            else:
+            elif followers[0] not in inserted_songs:
                 order.insert(i + 1, followers[0])
+                inserted_songs.add(followers[0])
                 inserted += 1
         i += 1
     # trim inserted overflow: drop lowest-prob unconstrained, unprotected
@@ -424,8 +442,12 @@ def predict(shows, target_date: str) -> dict:
     rules = segue_rules(history)
 
     # Recent form beats tour-wide: sets have stretched as the tour goes on
-    # (last-10 main median 19 vs tour-wide 18 as of late July 2026).
-    recent = tour[-10:]
+    # (last-10 main median 19 vs tour-wide 18 as of late July 2026). A
+    # season's opening shows have no recent form of their own, so the
+    # window reaches back into the previous season rather than taking a
+    # median of one or two shows — a lone festival set otherwise dictates
+    # a 9-song main set, too short to even fill the slots.
+    recent = (tour if len(tour) >= 4 else prior + tour)[-10:]
     n_main = int(statistics.median(len(main_set(s)) for s in recent))
     n_enc = int(statistics.median(len(encore(s)) for s in recent)) or 1
 
@@ -543,12 +565,21 @@ def predict(shows, target_date: str) -> dict:
                + [{"song": s, "slot": "main"} for s in middle]
                + [{"song": s, "slot": "closer"} for s in closer]
                + [{"song": s, "slot": "encore"} for s in enc_songs])
+    # career last-played date: a song can be absent all season and still
+    # have been played weeks ago in the previous one, so the sheet says
+    # when rather than implying a debut
+    last_date = {}
+    for s in history:
+        for song in set(s["songs"]):
+            last_date[song] = s["date"]
+
     for item in setlist:
         item["prob"] = round(prob.get(item["song"], 0.0), 3)
         item["plays_tour"] = plays_tour[item["song"]]
         li = last_played.get(item["song"])
         since = None if li is None else n_tour - li
         item["shows_since_played"] = since
+        item["last_played"] = last_date.get(item["song"])
         if item["slot"] == "main" and (since is None or since >= 10):
             item["deep_cut"] = True
 
