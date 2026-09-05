@@ -20424,10 +20424,41 @@
  {
   "venue": "The Gorge Amphitheatre",
   "city": "George, WA",
-  "songs": [],
-  "encore_from": null,
+  "songs": [
+   "Seek Up",
+   "Grux",
+   "Shake Me Like a Monkey",
+   "Funny the Way It Is",
+   "Lying in the Hands of God",
+   "Kill the Preacher",
+   "Why I Am",
+   "Dive In",
+   "Spaceman",
+   "Squirm",
+   "Alligator Pie",
+   "Seven",
+   "Time Bomb",
+   "Baby Blue",
+   "You & Me",
+   "Corn Bread",
+   "Crush",
+   "#41",
+   "The Best of What's Around",
+   "Some Devil",
+   "Recently"
+  ],
+  "encore_from": 19,
   "date": "2026-09-04",
   "id": "453094359",
   "url": "https://dmbalmanac.com/TourShowSet.aspx?id=453094359&tid=8188&where=2026"
+ },
+ {
+  "venue": "The Gorge Amphitheatre",
+  "city": "George, WA",
+  "songs": [],
+  "encore_from": null,
+  "date": "2026-09-05",
+  "id": "453094360",
+  "url": "https://dmbalmanac.com/TourShowSet.aspx?id=453094360&tid=8188&where=2026"
  }
 ]
