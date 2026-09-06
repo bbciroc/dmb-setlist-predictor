@@ -20455,10 +20455,41 @@
  {
   "venue": "The Gorge Amphitheatre",
   "city": "George, WA",
-  "songs": [],
-  "encore_from": null,
+  "songs": [
+   "Pantala Naga Pampa",
+   "Grey Street",
+   "Joyride",
+   "Kit Kat Jam",
+   "Warehouse",
+   "Lover Lay Down",
+   "Broken Things",
+   "The Only Thing",
+   "Don't Drink the Water",
+   "Raven",
+   "Sweet Up and Down",
+   "Satellite",
+   "Grace Is Gone",
+   "Fool in the Rain",
+   "Samurai Cop (Oh Joy Begin)",
+   "Pig",
+   "Lie in Our Graves",
+   "Ants Marching",
+   "Oh, Sister",
+   "American Baby Intro",
+   "American Baby"
+  ],
+  "encore_from": 18,
   "date": "2026-09-05",
   "id": "453094360",
   "url": "https://dmbalmanac.com/TourShowSet.aspx?id=453094360&tid=8188&where=2026"
+ },
+ {
+  "venue": "The Gorge Amphitheatre",
+  "city": "George, WA",
+  "songs": [],
+  "encore_from": null,
+  "date": "2026-09-06",
+  "id": "453094361",
+  "url": "https://dmbalmanac.com/TourShowSet.aspx?id=453094361&tid=8188&where=2026"
  }
 ]
