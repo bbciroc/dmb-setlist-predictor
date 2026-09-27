@@ -20517,10 +20517,27 @@
  {
   "venue": "Veterans United Home Loans Amphitheater at Virginia Beach",
   "city": "Virginia Beach, VA",
-  "songs": [],
+  "songs": [
+   "Save Me",
+   "So Damn Lucky",
+   "Peace on Earth",
+   "Papertown",
+   "Don't Drink the Water",
+   "Crush",
+   "Ants Marching"
+  ],
   "encore_from": null,
   "date": "2026-09-26",
   "id": "453094373",
   "url": "https://dmbalmanac.com/TourShowSet.aspx?id=453094373&tid=8187&where=2026"
+ },
+ {
+  "venue": "Highland Festival Grounds at Kentucky Exposition Center",
+  "city": "Louisville, KY",
+  "songs": [],
+  "encore_from": null,
+  "date": "2026-09-27",
+  "id": "453094365",
+  "url": "https://dmbalmanac.com/TourShowSet.aspx?id=453094365&tid=8187&where=2026"
  }
 ]
