@@ -20593,10 +20593,43 @@
  {
   "venue": "Bridgestone Arena",
   "city": "Nashville, TN",
-  "songs": [],
-  "encore_from": null,
+  "songs": [
+   "Grux",
+   "Shake Me Like a Monkey",
+   "You Might Die Trying\u00a0[false start]",
+   "You Might Die Trying",
+   "I Did It",
+   "Stay or Leave",
+   "Eh Hee",
+   "Grace Is Gone",
+   "So Right",
+   "Madman's Eyes",
+   "Time Bomb",
+   "Sledgehammer",
+   "Oh, Sister",
+   "Warehouse",
+   "Big Eyed Fish",
+   "Bartender",
+   "So Much to Say",
+   "Anyone Seen the Bridge",
+   "Too Much",
+   "Crush",
+   "Pig",
+   "Papertown",
+   "Tripping Billies"
+  ],
+  "encore_from": 21,
   "date": "2026-11-06",
   "id": "453094400",
   "url": "https://dmbalmanac.com/TourShowSet.aspx?id=453094400&tid=8191&where=2026"
+ },
+ {
+  "venue": "United Center",
+  "city": "Chicago, IL",
+  "songs": [],
+  "encore_from": null,
+  "date": "2026-11-07",
+  "id": "453094409",
+  "url": "https://dmbalmanac.com/TourShowSet.aspx?id=453094409&tid=8191&where=2026"
  }
 ]
