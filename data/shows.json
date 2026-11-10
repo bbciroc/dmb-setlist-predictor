@@ -20658,10 +20658,42 @@
  {
   "venue": "Amica Mutual Pavilion",
   "city": "Providence, RI",
-  "songs": [],
-  "encore_from": null,
+  "songs": [
+   "The Best of What's Around",
+   "The Song That Jane Likes",
+   "One Sweet World",
+   "So Damn Lucky",
+   "Monsters",
+   "Let's Dance",
+   "Crash Into Me",
+   "You Might Die Trying",
+   "Raven",
+   "Say Goodbye",
+   "Lying in the Hands of God",
+   "American Baby Intro",
+   "American Baby",
+   "The Riff",
+   "Typical Situation",
+   "Sweet Up and Down",
+   "So Much to Say",
+   "Anyone Seen the Bridge",
+   "Too Much\u00a0[fake]",
+   "Ants Marching",
+   "Just Breathe",
+   "Don't Drink the Water"
+  ],
+  "encore_from": 20,
   "date": "2026-11-09",
   "id": "453094407",
   "url": "https://dmbalmanac.com/TourShowSet.aspx?id=453094407&tid=8191&where=2026"
+ },
+ {
+  "venue": "CFG Bank Arena",
+  "city": "Baltimore, MD",
+  "songs": [],
+  "encore_from": null,
+  "date": "2026-11-10",
+  "id": "453094408",
+  "url": "https://dmbalmanac.com/TourShowSet.aspx?id=453094408&tid=8191&where=2026"
  }
 ]
