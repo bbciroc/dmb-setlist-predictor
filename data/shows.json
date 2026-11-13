@@ -20721,10 +20721,41 @@
  {
   "venue": "Madison Square Garden",
   "city": "New York, NY",
-  "songs": [],
-  "encore_from": null,
+  "songs": [
+   "Drive In Drive Out",
+   "What Would You Say",
+   "Madman's Eyes",
+   "Stay or Leave",
+   "Granny",
+   "So Right",
+   "Pay for What You Get",
+   "American Baby Intro",
+   "American Baby",
+   "You Might Die Trying",
+   "Stolen Away on 55th & 3rd",
+   "#41",
+   "Alligator Pie",
+   "Rhyme & Reason",
+   "Ants Marching",
+   "The Riff",
+   "Everyday",
+   "Lie in Our Graves",
+   "The Last Stop",
+   "Sister",
+   "The Stone"
+  ],
+  "encore_from": 19,
   "date": "2026-11-12",
   "id": "453094410",
   "url": "https://dmbalmanac.com/TourShowSet.aspx?id=453094410&tid=8191&where=2026"
+ },
+ {
+  "venue": "Madison Square Garden",
+  "city": "New York, NY",
+  "songs": [],
+  "encore_from": null,
+  "date": "2026-11-13",
+  "id": "453094411",
+  "url": "https://dmbalmanac.com/TourShowSet.aspx?id=453094411&tid=8191&where=2026"
  }
 ]
